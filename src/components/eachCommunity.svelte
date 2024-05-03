@@ -35,7 +35,7 @@
         <p class="text-xl text-zinc-400 leading-relaxed line-clamp-3 py-2 group-hover:text-white"> {community.description} </p>
     </div>
 
-    <div class="flex pt-5 pb-1 ">
+    <div class="flex pt-5 pb-1 pr-2 overflow-hidden">
         {#if community.tags.length > 0}            
             {#each community.tags.slice(0,3) as tag}
                 <div class="pr-3">

@@ -37,10 +37,11 @@
     "svelte-preprocess"
   ],
   "dependencies": {
+    "@loglib/tracker": "^0.8.0",
     "axios": "^1.6.8",
     "bits-ui": "^0.21.7",
     "clsx": "^2.1.1",
-    "lucide-svelte": "^0.377.0",
+    "lucide-svelte": "^0.378.0",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1"
   }

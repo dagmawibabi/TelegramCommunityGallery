@@ -4,11 +4,11 @@
 
 <div class="flex justify-end pt-8 text-zinc-500">
     <div class="flex ">
-        <a href="https://github.com/dagmawibabi/TelegramCommunityGallery" class="hover:text-cyan-500">
+        <a href="https://github.com/dagmawibabi/TelegramCommunityGallery" class="hover:text-blue-500">
             <Github size={20} />
         </a>
         <div class="w-4"></div>
-        <a href="https://t.me/Dagmawi_Babi" class="hover:text-cyan-500">
+        <a href="https://t.me/Dagmawi_Babi" class="hover:text-blue-500">
             <Send size={20}/>
         </a>
     </div>

@@ -1,35 +1,92 @@
 <script lang="ts">
 
+    import * as Select from "$lib/components/ui/select";
     import Socials from '../components/socials.svelte';
     import AddCommunity from '../components/addCommunity.svelte';
     import EachCommunity from '../components/eachCommunity.svelte';
 	import Footer from '../components/footer.svelte';
 	import axios from 'axios';
+	import { currentCommunityStore, allCommunitiesStore, filteredTagsStore } from '../store/store';
+	import Header from '../components/header.svelte';
 
-    interface Community {
-        name: String,
-        link: String,
-        description: String,
-        owner: String | null | undefined,
-        tags: String[],
-        type: String,
+    type Community = {
+        name: string,
+        link: string,
+        description: string,
+        owner: string | null | undefined,
+        tags: string[],
+        type: string,
     };
     let communities: Community[] = []
-    let communityCount = 0;
+
+    let allCommunities = <Community[]>[]
+    allCommunitiesStore.subscribe((data) => {
+        allCommunities = data;
+    })
 
     async function getCommunities() {
-        console.log("STARTED FETCHING!")
         let results = await axios({
             method: 'get',
             url: `https://telegramcommunitygalleryapi.onrender.com/getCommunities`,
             withCredentials: false,
         })
         communities = results["data"]
-        communityCount = communities.length;
-        console.log(communities)
-
+        allCommunitiesStore.set(communities)
     }
     getCommunities()
+
+    let tags = [
+    "Spiritual",
+    "Tech",
+    "News",
+    "Coding",
+    "Books",
+    "Company",
+    "School",
+    "Fashion",
+    "Food",
+    "Pets",
+    "Music",
+    "Crafts",
+    "Travel",
+    "Science",
+    "Fitness",
+    "Education",
+    "Photography",
+    "Humor",
+    "Politics",
+    "Nature",
+    "Literature",
+    "NSFW",
+    "e-Commerce",
+    "Film / TV",
+    "Fashion / Beauty",
+    "Art / Design",
+    "Games / Apps",
+    ];
+
+    let filterFeedTags = <string[]>[]
+    filteredTagsStore.subscribe((data) => {
+        filterFeedTags = data;
+    })
+    function filterFeed(tag: string) {
+        if(filterFeedTags.indexOf(tag) == -1){
+            filterFeedTags.push(tag)
+        } else {
+            const index = filterFeedTags.indexOf(tag);
+            if (index > -1) { 
+                filterFeedTags.splice(index, 1); 
+            }
+        }
+        // filterFeedTags = filterFeedTags;
+        filteredTagsStore.set(filterFeedTags)
+    }
+
+    function allElementsInArray(arr1: string[], arr2: string[]) {
+        return arr1.every(item => arr2.includes(item));
+    }
+
+    let isChannels:any = "all"
 
 </script>
 
@@ -45,30 +102,104 @@
             <Socials />
 
             <!-- HEADER -->
-            <div class="text-center">
-                <p class="text-lg text-orange-500 pt-6 "> #{communityCount} Communities Added! </p>
-                <p class="text-5xl font-bold pt-2 leading-snug"> Discover the Best <br/> Telegram Communities </p>
-                <div class="pt-5 pb-10">
-                    <p class="text-lg text-zinc-400"> Below are some of the most incredible channels and groups submitted by the public. <br /> This project was made with 🤍 by <a href="https://www.dagmawibabi.com" class="text-purple-400 hover:text-cyan-500 hover:underline underline-offset-4"> Dagmawi Babi </a> and it's completely opensource. </p>
-                </div>
+            <Header />
 
-                <AddCommunity {communities} {getCommunities}/>
+            <!-- ADD NEW COMMUNITY -->
+            <AddCommunity {communities} {getCommunities}/>
 
+            <!-- FILTERS -->
+            <div class="flex flex-row flex-wrap justify-center gap-1 overflow-scroll pt-10">
+                {#each tags as tag}
+                    <div class="pr-2 py-1">
+                        <!-- svelte-ignore a11y-click-events-have-key-events -->
+                        <!-- svelte-ignore a11y-no-static-element-interactions -->
+                        {#if filterFeedTags.indexOf(tag) == -1}
+                            <span on:click={(e) => filterFeed(tag)} 
+                                class="rounded-full border border-zinc-800 h-fit w-fit py-1 px-5 text-zinc-400 font-semibold hover:bg-blue-500 hover:text-black line-clamp-1"> 
+                                {tag} 
+                            </span>
+                        {:else}
+                            <span on:click={(e) => filterFeed(tag)} 
+                                class="rounded-full border border-zinc-800 h-fit w-fit py-1 px-5 text-black font-semibold bg-blue-500 hover:text-black line-clamp-1"> 
+                                {tag} 
+                            </span>
+                        {/if}
+
+                    </div>
+                {/each}
+            </div>
+
+            <!-- GROUP OR CHANNEL FILTER -->
+            <div class="pt-8 flex justify-end">
+                <Select.Root>
+                    <Select.Trigger class="w-[100px] border-zinc-700 rounded-xl">
+                        <Select.Value placeholder="All" />
+                    </Select.Trigger>
+                    <Select.Content class="bg-zinc-950 border-zinc-800">
+                        <Select.Item value="All" class="hover:bg-zinc-600" on:click={(e) => {isChannels = "all"}}> All </Select.Item>
+                        <Select.Item value="Channels" class="hover:bg-zinc-600" on:click={(e) => {isChannels = true}}> Channels </Select.Item>
+                        <Select.Item value="Groups" class="hover:bg-zinc-600" on:click={(e) => {isChannels = false}}> Groups </Select.Item>
+                    </Select.Content>
+                </Select.Root>
             </div>
 
             <!-- COMMUNITIES -->
-            <div class="grid grid-cols-3 gap-8 pt-28 pb-48">
-                {#if communities.length > 0}
+            {#if allCommunities.length > 0}
+                <div class="grid grid-cols-3 gap-8 pt-14 pb-48">
                     <!-- EACH COMMUNITY -->
-                    {#each communities as community}
-                        <EachCommunity {community} />
-                    {/each}                    
-                {/if}
-            </div>
+                    {#each allCommunities as community}
+                        {#if isChannels == "all"}
+                            {#if filterFeedTags.length == 0}
+                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                    <EachCommunity {community}/>
+                                </a>                                                    
+                            {:else if allElementsInArray(filterFeedTags, community.tags)}
+                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                    <EachCommunity {community}/>
+                                </a>                            
+                            {/if}
+                        {:else if isChannels == true}
+                            {#if community.type == "channel"}
+                                {#if filterFeedTags.length == 0}
+                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                    <EachCommunity {community}/>
+                                </a>                                                    
+                                {:else if allElementsInArray(filterFeedTags, community.tags)}
+                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                    <EachCommunity {community}/>
+                                </a>                            
+                                {/if}                
+                            {/if}
+                        {:else if isChannels == false}
+                                {#if community.type == "group"}
+                                    {#if filterFeedTags.length == 0}
+                                    <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                        <EachCommunity {community}/>
+                                    </a>                                                    
+                                    {:else if allElementsInArray(filterFeedTags, community.tags)}
+                                    <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                        <EachCommunity {community}/>
+                                    </a>                            
+                                    {/if}                
+                                {/if}
+                            {/if}
+                        {/each}                    
+                </div>
+            {:else}
+                <div class="pt-56 text-center w-full">
+                    <span class="text-xl text-purple-500"> Loading... </span>
+                </div>
+            {/if}
 
-            <Footer />
+
+            
         </div>
     </div>
+    
+    
+    <!-- FOOTER -->
+    <!-- <Footer /> -->
+    
 </div>
 
 

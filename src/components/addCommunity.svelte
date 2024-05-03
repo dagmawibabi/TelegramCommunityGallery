@@ -30,7 +30,6 @@
             }
         }
         selectedTags = selectedTags
-        console.log(selectedTags)
     }
 
     export let getCommunities: Function;
@@ -45,11 +44,10 @@
             link: communityLinkInput.value,
             description: communityDescriptionInput.value,
             owner: communityOwnerInput.value,
-            tags: selectedTags,
+            tags: selectedTags.length > 0 ? selectedTags : ["untagged"],
             type: radioValue
         }
         // SEND REQUIEST
-        console.log("STARTED POSTING!")
         let results = await axios({
             method: 'post',
             url: `https://telegramcommunitygalleryapi.onrender.com/submitCommunity`,
@@ -113,6 +111,8 @@
   ];
 
 </script>
+
+<div class="text-center">
 
 <Dialog.Root>
     <!-- TRIGGER -->
@@ -215,3 +215,4 @@
         </Dialog.Footer>
     </Dialog.Content>
 </Dialog.Root>
+</div>
