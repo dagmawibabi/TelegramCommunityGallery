@@ -105,6 +105,6 @@
     </div>
 
     <!-- FOOTER -->
-    <Footer />
+    <!-- <Footer /> -->
 
 </div>
