@@ -37,6 +37,7 @@
     "svelte-preprocess"
   ],
   "dependencies": {
+    "axios": "^1.6.8",
     "bits-ui": "^0.21.7",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.377.0",

@@ -1,0 +1,50 @@
+<script lang="ts">
+    export let community;
+
+    import { Rss, Users } from 'lucide-svelte';
+
+</script>
+
+
+<div class={
+    community.type == "channel" ? 
+        "group py-4 px-5 rounded-xl border border-zinc-800 bg-zinc-900 flex flex-col justify-between hover:border-emerald-400 hover:scale-105 duration-300" 
+        : "group py-4 px-5 rounded-xl border border-zinc-800 bg-zinc-900 flex flex-col justify-between hover:border-cyan-400 hover:scale-105 duration-300"}>
+    <div>
+        <div class="flex justify-between">
+            <!-- NAME -->
+            {#if community.type == "channel"}
+                <p class="text-2xl pb-2 w-60 leading-relaxed line-clamp-2 group-hover:text-emerald-500 font-semibold"> {community.name} </p>
+            {:else}                                
+                <p class="text-2xl pb-2 w-60 leading-relaxed line-clamp-2 group-hover:text-cyan-500 font-semibold"> {community.name} </p>
+            {/if}
+
+            <!-- CHANNEL OR GROUP -->
+            {#if community.type == "channel"}
+                <div class="rounded-full border border-emerald-900 bg-emerald-500 text-black p-2 absolute -m-8">
+                    <Rss size={14}/>
+                </div>
+            {:else}                                
+                <div class="rounded-full bg-cyan-500 p-2 absolute -m-8">
+                    <Users size={14} class="text-black"/>
+                    <!-- <Users size={18} class="text-cyan-500"/> -->
+                </div>
+            {/if}
+        </div>
+        <!-- DESCRIPTION -->
+        <p class="text-xl text-zinc-400 leading-relaxed line-clamp-3 py-2 group-hover:text-white"> {community.description} </p>
+    </div>
+
+    <div class="flex pt-5 pb-1 ">
+        {#each community.tags as tag}
+            <div class="pr-3">
+                {#if community.type == "channel"}
+                    <div class="rounded-full border border-zinc-700 pb-1 px-5 font-semibold hover:bg-emerald-500 hover:text-black"> {tag} </div>
+                {:else}
+                    <div class="rounded-full border border-zinc-700 pb-1 px-5 font-semibold hover:bg-cyan-500 hover:text-black"> {tag} </div>
+                {/if}
+            </div>
+        {/each}
+    </div>
+    
+</div>
