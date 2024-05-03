@@ -5,6 +5,7 @@
     import * as Dialog from "$lib/components/ui/dialog/index.ts";
 
     import RadioComponent from './radioComponent.svelte';
+	import axios from 'axios';
 	let radioValue: any;
 	
 	const options = [
@@ -32,7 +33,9 @@
         console.log(selectedTags)
     }
 
-    function submitCommunity() {
+    export let getCommunities: Function;
+
+    async function submitCommunity() {
         let communityNameInput = document.getElementById("communityName") as HTMLInputElement;
         let communityLinkInput = document.getElementById("communityLink") as HTMLInputElement;
         let communityDescriptionInput = document.getElementById("communityDescription") as HTMLInputElement;
@@ -45,10 +48,17 @@
             tags: selectedTags,
             type: radioValue
         }
-        if (newCommunity.name.length > 1 && newCommunity.link.length > 1 && newCommunity.description.length > 1 && newCommunity.tags.length > 1){
-            // SEND REQUIEST
-        }
-        console.log(newCommunity);
+        // SEND REQUIEST
+        console.log("STARTED POSTING!")
+        let results = await axios({
+            method: 'post',
+            url: `https://telegramcommunitygalleryapi.onrender.com/submitCommunity`,
+            withCredentials: false,
+            data: newCommunity
+        })
+        communities = results["data"]
+        selectedTags = []
+        getCommunities()
     }
 
 

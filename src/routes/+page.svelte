@@ -4,6 +4,7 @@
     import AddCommunity from '../components/addCommunity.svelte';
     import EachCommunity from '../components/eachCommunity.svelte';
 	import Footer from '../components/footer.svelte';
+	import axios from 'axios';
 
     interface Community {
         name: String,
@@ -13,225 +14,22 @@
         tags: String[],
         type: String,
     };
-    let communities: Community[] = [
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "channel",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-        {
-            "name": "Dagmawi Babi Chat",
-            "link": "@DagmawiBabi",
-            "description": "Believer | Creative Developer",
-            "type": "group",
-            "owner": "@DagmawiBabi",
-            "tags": ["Tech", "Spiritual", "Personal"],
-        },
-    ]
-    let communityCount = communities.length;
+    let communities: Community[] = []
+    let communityCount = 0;
+
+    async function getCommunities() {
+        console.log("STARTED FETCHING!")
+        let results = await axios({
+            method: 'get',
+            url: `https://telegramcommunitygalleryapi.onrender.com/getCommunities`,
+            withCredentials: false,
+        })
+        communities = results["data"]
+        communityCount = communities.length;
+        console.log(communities)
+
+    }
+    getCommunities()
 
 </script>
 
@@ -254,16 +52,18 @@
                     <p class="text-lg text-zinc-400"> Below are some of the most incredible channels and groups submitted by the public. <br /> This project was made with 🤍 by <a href="https://www.dagmawibabi.com" class="text-purple-400 hover:text-cyan-500 hover:underline underline-offset-4"> Dagmawi Babi </a> and it's completely opensource. </p>
                 </div>
 
-                <AddCommunity {communities}/>
+                <AddCommunity {communities} {getCommunities}/>
 
             </div>
 
             <!-- COMMUNITIES -->
             <div class="grid grid-cols-3 gap-8 pt-28 pb-48">
-                <!-- EACH COMMUNITY -->
-                {#each communities as community}
-                    <EachCommunity {community} />
-                {/each}
+                {#if communities.length > 0}
+                    <!-- EACH COMMUNITY -->
+                    {#each communities as community}
+                        <EachCommunity {community} />
+                    {/each}                    
+                {/if}
             </div>
 
             <Footer />

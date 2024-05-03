@@ -23,7 +23,7 @@
     // getVisitorCount();
 </script>
 
-<div class="justify-center text-zinc-300 text-center pb-10 text-lg">
+<div class="absolute left-0 right-0 bottom-0 justify-center text-zinc-300 text-center pb-10 text-lg">
     <span class=""> 
         This gallery has been visited <span > {visitorCount} </span> times. 🤍 
     </span>

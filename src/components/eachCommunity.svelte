@@ -36,15 +36,17 @@
     </div>
 
     <div class="flex pt-5 pb-1 ">
-        {#each community.tags as tag}
-            <div class="pr-3">
-                {#if community.type == "channel"}
-                    <div class="rounded-full border border-zinc-700 pb-1 px-5 font-semibold hover:bg-emerald-500 hover:text-black"> {tag} </div>
-                {:else}
-                    <div class="rounded-full border border-zinc-700 pb-1 px-5 font-semibold hover:bg-cyan-500 hover:text-black"> {tag} </div>
-                {/if}
-            </div>
-        {/each}
+        {#if community.tags.length > 0}            
+            {#each community.tags.slice(0,3) as tag}
+                <div class="pr-3">
+                    {#if community.type == "channel"}
+                        <div class="rounded-full border border-zinc-700 pb-1 px-5 font-semibold hover:bg-emerald-500 hover:text-black"> {tag} </div>
+                    {:else}
+                        <div class="rounded-full border border-zinc-700 pb-1 px-5 font-semibold hover:bg-cyan-500 hover:text-black"> {tag} </div>
+                    {/if}
+                </div>
+            {/each}
+        {/if}
     </div>
     
 </div>
