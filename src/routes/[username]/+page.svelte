@@ -106,7 +106,7 @@
                     <div class="flex flex-row flex-wrap pt-6">
                         {#each currentCommunity.tags as tag}
                         <div class="pr-2 pb-3">
-                            <div class={currentCommunity.type == "channel" ? "rounded-full px-3 bg-emerald-500 w-fit text-sm text-black font-semibold line-clamp-1" : "rounded-full px-3 bg-cyan-500 w-fit text-sm text-black font-semibold line-clamp-1 overflow-scroll no-scrollbar"}>
+                            <div class={currentCommunity.type == "channel" ? "rounded-full px-3 bg-emerald-500 w-fit text-sm text-black font-semibold line-clamp-1 whitespace-nowrap" : "rounded-full px-3 bg-cyan-500 w-fit text-sm text-black font-semibold line-clamp-1 overflow-scroll no-scrollbar whitespace-nowrap"}>
                                 {tag}
                             </div>                            
                         </div>
