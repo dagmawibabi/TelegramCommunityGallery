@@ -43,7 +43,6 @@
     "Books",
     "Company",
     "School",
-    "Fashion",
     "Food",
     "Pets",
     "Music",

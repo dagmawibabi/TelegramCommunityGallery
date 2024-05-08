@@ -88,7 +88,6 @@
     "Books",
     "Company",
     "School",
-    "Fashion",
     "Food",
     "Pets",
     "Music",
@@ -108,7 +107,7 @@
     "Fashion / Beauty",
     "Art / Design",
     "Games / Apps",
-  ];
+    ];
 
 </script>
 
