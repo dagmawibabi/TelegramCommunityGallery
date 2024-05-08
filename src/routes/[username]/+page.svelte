@@ -56,7 +56,7 @@
                 <div class={
                     currentCommunity.type == "channel" ? 
                     "w-fit mx-auto px-4 py-3 rounded-2xl border border-emerald-500 bg-zinc-950 md:min-w-[400px] md:px-8 md:py-6" : 
-                    "w-fit mx-auto px-4 py-3 rounded-2xl border border-cyan-500 bg-zinc-950 min-w-[400px] md:px-8 md:py-6"}>
+                    "w-fit mx-auto px-4 py-3 rounded-2xl border border-cyan-500 bg-zinc-950 md:min-w-[400px] md:px-8 md:py-6"}>
 
                     {#if currentCommunity.type == "channel"}
                         <div class="absolute -m-12 text-black rounded-full bg-emerald-500 w-fit p-3 hidden md:visible">
