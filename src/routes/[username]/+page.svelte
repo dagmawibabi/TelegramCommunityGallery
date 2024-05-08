@@ -35,7 +35,7 @@
     <div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#63e_100%)]"></div>
 
     <!-- MAIN SECTION -->
-    <div class="absolute bottom-0 left-0 right-0 top-0 z-50 w-full h-screen overflow-scroll">
+    <div class="absolute bottom-0 left-0 right-0 top-0 z-50 w-full h-screen overflow-scroll no-scrollbar">
         <div class="w-full m-auto
             md:w-1/2 md:px-0
         ">
@@ -51,7 +51,7 @@
             
             <!-- CURRENT COMMUNITY -->
             <div class="py-10 px-6 pb-40
-                md:px-20 md:py-20
+                md:px-20
             ">
                 <div class={
                     currentCommunity.type == "channel" ? 
@@ -67,7 +67,7 @@
                             <Users size={25}/>
                         </div>
                     {/if}
-                    <div class={currentCommunity.type == "channel" ? "text-md font-bold pb-1 text-emerald-500 md:text-xl" : "text-xl font-bold pb-1 text-cyan-500"}>
+                    <div class={currentCommunity.type == "channel" ? "text-lg font-bold pb-1 text-emerald-500 md:text-md" : "text-lg font-bold pb-1 text-cyan-500"}>
                         {currentCommunity.name}
                     </div>
 
@@ -78,12 +78,21 @@
                     </a>
 
             <!-- {currentCommunity.description} -->
-                    <div class="text-md text-zinc-200 pb-5 flex flex-wrap md:text-lg">
-                        {#each currentCommunity.description.split(" ") as letters}
-                        <span class={currentCommunity.type == "channel" ? "hover:text-emerald-500" : "hover:text-cyan-500"}>
-                            {letters}&nbsp;
-                        </span>
+                    <div class="text-md text-zinc-200 line-clamp-none pb-5 flex flex-wrap md:text-md">
+                        <!-- <p> {currentCommunity.description} </p> -->
+                        {#if currentCommunity.description.includes("\n") == true}
+                            {#each currentCommunity.description.split("\n") as letters}
+                            <span class={currentCommunity.type == "channel" ? "hover:text-emerald-500" : "hover:text-cyan-500"}>
+                                {letters}&nbsp;
+                            </span>
+                            {/each}
+                        {:else}                            
+                            {#each currentCommunity.description.split(" ") as letters}
+                            <span class={currentCommunity.type == "channel" ? "hover:text-emerald-500" : "hover:text-cyan-500"}>
+                                {letters}&nbsp;
+                            </span>
                         {/each}
+                    {/if}
                     </div>
 
                     {#if currentCommunity.owner != ""}
