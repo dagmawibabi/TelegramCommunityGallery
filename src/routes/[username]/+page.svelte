@@ -36,51 +36,59 @@
 
     <!-- MAIN SECTION -->
     <div class="absolute bottom-0 left-0 right-0 top-0 z-50 w-full h-screen overflow-scroll">
-        <div class="w-1/2 m-auto">
-            <!-- SOCIALS -->
-            <Socials />
+        <div class="w-full m-auto
+            md:w-1/2 md:px-0
+        ">
+            <div class="px-5
+                md:px-0
+            ">            
+                <!-- SOCIALS -->
+                <Socials />
 
-            <!-- HEADER -->
-            <Header />
+                <!-- HEADER -->
+                <Header />
+            </div>
             
             <!-- CURRENT COMMUNITY -->
-            <div class="py-20 px-40 pb-40">
+            <div class="py-10 px-6 pb-40
+                md:px-20 md:py-20
+            ">
                 <div class={
                     currentCommunity.type == "channel" ? 
-                    "w-fit min-w-[400px] mx-auto px-10 py-10 rounded-2xl border border-emerald-500 bg-zinc-950" : 
-                    "w-fit min-w-[400px] mx-auto px-10 py-10 rounded-2xl border border-cyan-500 bg-zinc-950"}>
+                    "w-fit mx-auto px-4 py-3 rounded-2xl border border-emerald-500 bg-zinc-950 md:min-w-[400px] md:px-8 md:py-6" : 
+                    "w-fit mx-auto min-w-[400px] px-8 py-6 rounded-2xl border border-cyan-500 bg-zinc-950"}>
 
                     {#if currentCommunity.type == "channel"}
-                        <div class="absolute -m-16 text-black rounded-full bg-emerald-500 w-fit p-3">
+                        <div class="absolute -m-12 text-black rounded-full bg-emerald-500 w-fit p-3 hidden md:visible">
                             <Rss size={25} />
                         </div>
                     {:else}
-                        <div class="absolute -m-16 text-black rounded-full bg-cyan-500 w-fit p-3">
+                        <div class="absolute -m-12 text-black rounded-full bg-cyan-500 w-fit p-3">
                             <Users size={25}/>
                         </div>
                     {/if}
-                    <div class={currentCommunity.type == "channel" ? "text-4xl font-bold pb-3 text-emerald-500" : "text-4xl font-bold pb-3 text-cyan-500"}>
+                    <div class={currentCommunity.type == "channel" ? "text-md font-bold pb-1 text-emerald-500 md:text-xl" : "text-xl font-bold pb-1 text-cyan-500"}>
                         {currentCommunity.name}
                     </div>
 
                     <a href={`https://t.me/${currentCommunity.link.substring(1)}`}>
-                        <div class={currentCommunity.type == "channel" ? "w-fit text-xl pb-6 text-cyan-500 font-semibold" : "text-xl pb-6 text-emerald-500 font-semibold"}>
+                        <div class={currentCommunity.type == "channel" ? "w-fit text-sm pb-6 text-cyan-500 font-semibold md:text-md" : "text-md pb-6 text-emerald-500 font-semibold"}>
                             {currentCommunity.link}
                         </div>
                     </a>
 
-                    <div class="text-2xl text-zinc-400 pb-5 flex flex-wrap">
+            <!-- {currentCommunity.description} -->
+                    <div class="text-sm text-zinc-200 pb-5 flex flex-wrap md:text-md">
                         {#each currentCommunity.description.split(" ") as letters}
                         <span class={currentCommunity.type == "channel" ? "hover:text-emerald-500" : "hover:text-cyan-500"}>
                             {letters}&nbsp;
                         </span>
-                        <!-- {currentCommunity.description} -->
                         {/each}
                     </div>
 
                     {#if currentCommunity.owner != ""}
                         <a href={`https://t.me/${currentCommunity.owner?.substring(1)}`}>
-                            <div class="text-xl font-semibold">
+                            <div class="text-md font-semibold">
                                 Owner: <span class={currentCommunity.type == "channel" ? "text-cyan-500" : "text-emerald-500"}>{currentCommunity.owner}</span>
                             </div>
                         </a>
@@ -88,8 +96,8 @@
 
                     <div class="flex flex-row flex-wrap pt-6">
                         {#each currentCommunity.tags as tag}
-                        <div class="pr-3 pb-3">
-                            <div class={currentCommunity.type == "channel" ? "rounded-full px-6 bg-emerald-500 w-fit text-xl text-black font-semibold" : "rounded-full px-6 bg-cyan-500 w-fit text-xl text-black font-semibold"}>
+                        <div class="pr-2 pb-3">
+                            <div class={currentCommunity.type == "channel" ? "rounded-full px-3 bg-emerald-500 w-fit text-sm text-black font-semibold" : "rounded-full px-3 bg-cyan-500 w-fit text-sm text-black font-semibold"}>
                                 {tag}
                             </div>                            
                         </div>

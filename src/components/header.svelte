@@ -19,13 +19,22 @@
 </script>
 
 <div class="text-center">
-    <p class="text-lg text-orange-500 pt-6 "> #{allCommunities.length} Communities Added! </p>
+    <p class="text-sm text-orange-500 pt-5
+        md:pt-0
+    "> 
+        #{allCommunities.length} Communities Added! 
+    </p>
     <a href="/">
-        <p class="text-5xl font-bold pt-2 leading-snug hover:text-blue-500"> Discover the Best <br/> Telegram Communities </p>
+        <p class="text-2xl font-bold pt-1 leading-snug hover:text-blue-500
+            md:text-4xl
+        "> 
+            Discover the Best <br/> Telegram Communities 
+        </p>
     </a>
-    <div class="pt-5 pb-10">
-        <p class="text-lg text-zinc-400"> Below are some of the most incredible channels and groups submitted by the public. <br />  
+    <div class="pt-3 pb-2">
+        <p class="text-sm text-zinc-400"> Here are some of the most incredible channels and groups submitted by the public. 
+            <br class="hidden md:visible"/>  
             <Footer />
-            And was made with 🤍 by <a href="https://www.dagmawibabi.com" class="text-white underline underline-offset-4 hover:text-blue-500 hover:underline "> Dagmawi Babi </a>. </p>
+        </p>
     </div>
 </div>

@@ -112,21 +112,23 @@
 
 </script>
 
-<div class="text-center">
+<div class="text-center pt-3">
 
 <Dialog.Root>
     <!-- TRIGGER -->
     <Dialog.Trigger>
         <div 
-            class="flex align-middle items-center rounded-full border border-zinc-700 w-fit py-2 px-6 text-center font-semibold mx-auto hover:bg-blue-500 hover:text-black"> 
-            <Send size={16} />
-            <p class="pl-3 text-xl">
+            class="flex align-middle items-center rounded-full border border-zinc-700 w-fit py-1 px-4 text-center font-semibold mx-auto hover:bg-blue-500 hover:text-black"> 
+            <Send size={16}/>
+            <p class="pl-2 text-sm pb-1
+                md:text-md
+            ">
                 Submit Your Channel / Group
             </p>
         </div>    
     </Dialog.Trigger>
 
-    <Dialog.Content class="sm:max-w-[425px]  bg-zinc-900 border-zinc-800 rounded-xl ">
+    <Dialog.Content class="sm:max-w-[425px] bg-zinc-900 border-zinc-800 rounded-xl ">
         <!-- HEADER -->
         <Dialog.Header>
             <Dialog.Title class="text-2xl font-semibold"> Add Channel / Group </Dialog.Title>
