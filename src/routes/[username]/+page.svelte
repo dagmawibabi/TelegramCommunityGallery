@@ -63,7 +63,7 @@
                             <Rss size={25} />
                         </div>
                     {:else}
-                        <div class="absolute -m-12 text-black rounded-full bg-cyan-500 w-fit p-3">
+                        <div class="absolute -m-12 text-black rounded-full bg-cyan-500 w-fit p-3 hidden md:visible">
                             <Users size={25}/>
                         </div>
                     {/if}
@@ -78,7 +78,7 @@
                     </a>
 
             <!-- {currentCommunity.description} -->
-                    <div class="text-sm text-zinc-200 pb-5 flex flex-wrap md:text-md">
+                    <div class="text-md text-zinc-200 pb-5 flex flex-wrap md:text-lg">
                         {#each currentCommunity.description.split(" ") as letters}
                         <span class={currentCommunity.type == "channel" ? "hover:text-emerald-500" : "hover:text-cyan-500"}>
                             {letters}&nbsp;

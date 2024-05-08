@@ -33,7 +33,7 @@
     </a>
     <div class="pt-3 pb-2">
         <p class="text-sm text-zinc-400"> Here are some of the most incredible channels and groups submitted by the public. 
-            <br class="hidden md:visible"/>  
+            <br class="hidden md:block"/>  
             <Footer />
         </p>
     </div>

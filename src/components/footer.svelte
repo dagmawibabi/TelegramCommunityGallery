@@ -31,7 +31,7 @@
     
 </script>
 
-<span class="hidden md:visible">
+<span class="hidden md:block">
     This gallery has been visited <span class="text-white" > {visitorCount} times </span> and was made with love by <a href="https://www.dagmawibabi.com" class="text-white underline underline-offset-4 hover:text-blue-500 hover:underline"> Dagmawi Babi</a>.
 </span>
 

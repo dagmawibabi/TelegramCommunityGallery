@@ -199,7 +199,7 @@
                 </div>
             {:else}
                 <div class="pt-40 pb-60 text-center w-full">
-                    <span class="text-xl text-purple-500"> Loading... </span>
+                    <span class="text-md text-zinc-300"> Loading Communities... </span>
                 </div>
             {/if}
 
