@@ -188,15 +188,15 @@
                         <div class="p-1 lowercase">
                             {#if radioValue == "channel"}
                                 {#if selectedTags.indexOf(tag) == -1}
-                                    <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 hover:bg-emerald-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
+                                    <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap hover:bg-emerald-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {:else}
-                                    <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 bg-emerald-400 text-black overflow-scroll no-scrollbar"> {tag} </span>
+                                    <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap bg-emerald-400 text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {/if}
                             {:else}
                                 {#if selectedTags.indexOf(tag) == -1}
-                                    <span  on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 hover:bg-cyan-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
+                                    <span  on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap hover:bg-cyan-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {:else}
-                                    <span  on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 bg-cyan-400 text-black overflow-scroll no-scrollbar"> {tag} </span>
+                                    <span  on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap bg-cyan-400 text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {/if}
                             {/if}
                         </div>
