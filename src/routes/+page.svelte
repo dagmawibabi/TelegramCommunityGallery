@@ -199,7 +199,7 @@
                         {/each}                    
                 </div>
             {:else}
-                <div class="pt-56 text-center w-full">
+                <div class="pt-40 pb-60 text-center w-full">
                     <span class="text-xl text-purple-500"> Loading... </span>
                 </div>
             {/if}
