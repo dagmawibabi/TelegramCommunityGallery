@@ -96,7 +96,7 @@
     <div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#63e_100%)]"></div>
 
     <!-- MAIN SECTION -->
-    <div class="absolute bottom-0 left-0 right-0 top-0 z-50 w-full h-screen overflow-scroll">
+    <div class="absolute bottom-0 left-0 right-0 top-0 z-50 w-full h-screen overflow-scroll no-scrollbar">
         <div class="w-full m-auto
             md:w-1/2 md:px-0
         ">
@@ -113,7 +113,7 @@
                 <AddCommunity {communities} {getCommunities}/>
 
                 <!-- FILTERS -->
-                <div class="flex flex-row flex-wrap justify-center gap-1 overflow-scroll pt-8">
+                <div class="flex flex-row flex-wrap justify-center gap-1 overflow-scroll no-scrollbar pt-8">
                     {#each tags as tag}
                         <div class="pr-0 py-1
                             md:pr-2 md:py-1

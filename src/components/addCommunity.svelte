@@ -127,7 +127,7 @@
         </div>    
     </Dialog.Trigger>
 
-    <Dialog.Content class="h-[400px] md:h-fit overflow-scroll w-[350px] sm:max-w-[425px] bg-zinc-900 border-zinc-800 rounded-xl ">
+    <Dialog.Content class="h-[400px] md:h-3/4 overflow-scroll no-scrollbar w-[350px] sm:max-w-[425px] bg-zinc-900 border-zinc-800 rounded-xl ">
         <!-- HEADER -->
         <Dialog.Header class="text-left">
             <Dialog.Title class="text-md font-semibold"> Add Channel / Group </Dialog.Title>
