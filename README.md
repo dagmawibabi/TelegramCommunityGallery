@@ -1,6 +1,7 @@
+![Screenshot](/static/Screenshot.jpg)
+
 # Telegram Community Gallery 🌟
 **[Telegram Community Gallery](https://telegram.dagmawi.dev)** is a platform where users can discover and submit their favorite Telegram channels and groups, creating a vibrant space for community exploration. Whether you're a seasoned Telegram user or just diving into the world of Telegram communities, this platform is designed with you in mind. 😊
-
 
 ### Features 🎉
 - **Discover Communities**: Explore a wide range of Telegram channels and groups, curated by fellow users.
@@ -10,7 +11,6 @@
 
 ### Tech Stack 💻
 Telegram Community Gallery is built using the following technologies:
-
 - **Frontend**: [SvelteKit](https://kit.svelte.dev/) and [Tailwind](https://tailwindcss.com/)
 - **Icons**: [Lucide Icons](https://lucide.dev/)
 - **Component Library**: [Shadcn-Svelte](https://www.shadcn-svelte.com/)
@@ -22,7 +22,6 @@ To get started with Telegram Community Gallery, simply visit our [Website](https
 
 ### How to Contribute 🤝
 We welcome contributions from the community! Follow these steps to contribute:
-
 1. **Fork the Repository**: Fork the Telegram Community Gallery repository to your GitHub account.
 2. **Make Changes**: Create a new branch, make your changes, and commit them to your branch.
 3. **Create a Pull Request**: Once your changes are ready, create a detailed pull request (PR) explaining the changes you've made.
