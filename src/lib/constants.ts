@@ -29,6 +29,8 @@ export const TAGS = [
     "FOSS",
     "Dumps",
     "Gaming",
+    "Podcast",
+    "Resources",
     "Language",
     "Governmental",
     "e-Commerce",
