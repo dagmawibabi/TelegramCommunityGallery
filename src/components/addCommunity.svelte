@@ -72,7 +72,7 @@
     };
     function changeDuplicates(e: any) {
         communities.forEach((value, index) => {
-            if(value.link.toLowerCase() == e.target.value.toLowerCase()){
+            if(value.link.trim().toLowerCase() == e.target.value.trim().toLowerCase()){
                 foundDuplicateLink = true;
             } else {
                 foundDuplicateLink = false;

@@ -1,38 +1,36 @@
-# create-svelte
+# Telegram Community Gallery 🌟
+**Telegram Community Gallery** is a platform where users can discover and submit their favorite Telegram channels and groups, creating a vibrant space for community exploration. Whether you're a seasoned Telegram user or just diving into the world of Telegram communities, this platform is designed with you in mind.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-## Creating a project
+### Features 🎉
+- **Discover Communities**: Explore a wide range of Telegram channels and groups, curated by fellow users.
+- **Submit Your Community**: Share your favorite Telegram communities with the world by submitting them to the gallery.
+- **Tagging and Filtering**: Easily find communities that match your interests with powerful tagging and filtering options.
+- **Crowdsourced and Open Source**: The platform thrives on community contributions and is completely open source, ensuring transparency and inclusivity.
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Tech Stack 💻
+Telegram Community Gallery is built using the following technologies:
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- **Frontend**: SvelteKit and Tailwind
+- **Backend**: HonoJS 
+- **Database**: MongoDB
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+### Getting Started 🚀
+To get started with Telegram Community Gallery, simply visit our [Website](https://telegram.dagmawi.dev) and start exploring! If you'd like to contribute to the project or report any issues, check out our GitHub repository.
 
-## Developing
+### How to Contribute 🤝
+We welcome contributions from the community! Follow these steps to contribute:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. **Fork the Repository**: Fork the Telegram Community Gallery repository to your GitHub account.
+2. **Make Changes**: Create a new branch, make your changes, and commit them to your branch.
+3. **Create a Pull Request**: Once your changes are ready, create a detailed pull request (PR) explaining the changes you've made.
+4. **Review and Iterate**: Collaborate with the maintainers to review and iterate on your changes until they are ready to be merged.
+5. **That's it!**: Can't wait to see the wonders you'll be doing.
 
-```bash
-npm run dev
+For more detailed guidelines on contributing, please refer to our contribution guidelines.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### Feedback and Support 💌
+Have any questions, suggestions, or need support? Feel free to reach out to us in our discussions tab or open an issue on GitHub. Your feedback helps us make Telegram Community Gallery even better!
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### License 📝
+Telegram Community Gallery is licensed under the MIT License.
