@@ -119,7 +119,7 @@
 	}
 </script>
 
-<div class="text-center pt-3">
+<div class="text-center pt-3" style="position: sticky; top: 0;">
 	<Dialog.Root>
 		<!-- TRIGGER -->
 		<Dialog.Trigger>

@@ -18,10 +18,10 @@
 
 </script>
 
-<div class="text-center">
+<div class="text-center ">
     <p class="text-sm text-orange-500 pt-5
         md:pt-0
-    "> 
+    " > 
         #{allCommunities.length} Communities Added! 
     </p>
     <a href="/">

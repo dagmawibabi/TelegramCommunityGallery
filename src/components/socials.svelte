@@ -4,8 +4,8 @@
 
 <div class="flex justify-end pt-4 text-zinc-500
     md:pt-8
-">
-    <div class="flex ">
+" style="position: sticky; top: 0;">
+    <div class="flex " >
         <a href="https://github.com/dagmawibabi/TelegramCommunityGallery" class="hover:text-blue-500">
             <Github size={20} />
         </a>
