@@ -5,8 +5,25 @@
     import * as Dialog from "$lib/components/ui/dialog/index.ts";
 
     import RadioComponent from './radioComponent.svelte';
-	import axios from 'axios';
-	let radioValue: any;
+	// import axios from 'axios';
+
+    import {TAGS} from '$lib/constants'
+	// import { error, redirect } from '@sveltejs/kit';
+
+
+    interface Community {
+        name: String,
+        link: String,
+        description: String,
+        owner: String | null | undefined,
+        tags: String[],
+        type: String,
+    };
+
+    // export let communities: Community[];
+    let errors: string[] = [ ]
+    // let foundDuplicateLink = false
+
 	
 	const options = [
         {
@@ -19,7 +36,20 @@
 	    },
     ]
 
+    let submitting = false;
+
+
+
+    // export let getCommunities: Function;
+
+    let name = ''
+    let link = ''
+    let description = ''
+    let owner: string | null | undefined = ''
     let selectedTags: String[] = []
+    let type = ''
+
+
     function addRemoveTag(tag: String){
         if(selectedTags.indexOf(tag) == -1){
             selectedTags.push(tag)
@@ -32,82 +62,55 @@
         selectedTags = selectedTags
     }
 
-    export let getCommunities: Function;
 
     async function submitCommunity() {
-        let communityNameInput = document.getElementById("communityName") as HTMLInputElement;
-        let communityLinkInput = document.getElementById("communityLink") as HTMLInputElement;
-        let communityDescriptionInput = document.getElementById("communityDescription") as HTMLInputElement;
-        let communityOwnerInput = document.getElementById("communityOwner") as HTMLInputElement;
+        errors = []
+        submitting = true
+        
         let newCommunity: Community = {
-            name: communityNameInput.value,
-            link: communityLinkInput.value,
-            description: communityDescriptionInput.value,
-            owner: communityOwnerInput.value,
+            name,
+            link,
+            description,
+            owner,
             tags: selectedTags.length > 0 ? selectedTags : ["untagged"],
-            type: radioValue
+            type: type
         }
-        // SEND REQUIEST
-        let results = await axios({
-            method: 'post',
-            url: `https://telegramcommunitygalleryapi.onrender.com/submitCommunity`,
-            withCredentials: false,
-            data: newCommunity
-        })
-        communities = results["data"]
-        selectedTags = []
-        getCommunities()
-    }
 
+        // CHECK DIPLICATE USERNAME
+        let community = await fetch(`/api/get-community?link=${link}`)
+        let res = await community.json()
 
-    export let communities: Community[];
-    let foundDuplicateLink = false
-    interface Community {
-        name: String,
-        link: String,
-        description: String,
-        owner: String | null | undefined,
-        tags: String[],
-        type: String,
-    };
-    function changeDuplicates(e: any) {
-        communities.forEach((value, index) => {
-            if(value.link.trim().toLowerCase() == e.target.value.trim().toLowerCase()){
-                foundDuplicateLink = true;
+        if(!res.length){
+            let results = await fetch('/api/create-community', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newCommunity)
+            })
+            const re = await results.json()
+
+            if (re.error) {
+                errors.push("Error creating community")
+                errors = errors
+                console.log(re.body);
             } else {
-                foundDuplicateLink = false;
+                // Please find something reasonable
+                window.location.reload()
+                console.log(re);
             }
-        })
+
+        }else{
+            errors.push("duplicate username")
+            errors = errors
+        }
+
+        // communities = results["data"]
+        selectedTags = []
+        submitting = false
     }
 
-    let tags = [
-    "Spiritual",
-    "Tech",
-    "News",
-    "Coding",
-    "Books",
-    "Company",
-    "School",
-    "Food",
-    "Pets",
-    "Music",
-    "Crafts",
-    "Travel",
-    "Science",
-    "Fitness",
-    "NSFW",
-    "Education",
-    "Photography",
-    "Humor",
-    "Politics",
-    "Nature",
-    "Literature",
-    "e-Commerce",
-    "Film / TV",
-    "Fashion / Beauty",
-    "Art / Design",
-    "Games / Apps",
-    ];
+    
 
 </script>
 
@@ -144,20 +147,22 @@
                 class="bg-zinc-800 rounded-xl p-1 pb-2 px-3 outline-none text-sm"
                 placeholder="eg: Pavel Durov"
                 autocomplete="off"
+                bind:value={name}
                 required
             />
             <label for="communityLink" class="pt-3 pb-3 text-sm font-semibold"> Community Link </label>
+            <!-- Check duplicate - api route -->
             <input 
                 id="communityLink"
                 class="bg-zinc-800 rounded-xl p-1 pb-2 px-3 outline-none text-sm"
                 placeholder="eg: @Durov"
                 autocomplete="off"
-                on:input={(e) => changeDuplicates(e)}
+                bind:value={link}
                 required
             />
-            {#if foundDuplicateLink == true}
+            <!-- {#if errors.includes('duplicate username')}
                 <span class="text-red-500 text-sm pt-2 pl-2"> Username is duplicate! </span>
-            {/if}
+            {/if} -->
             <label for="communityDescription" class="pt-3 pb-3 text-sm font-semibold"> Community Description </label>
             <textarea 
                 id="communityDescription"
@@ -165,6 +170,7 @@
                 placeholder="eg: Announcement channel of Telegram's CEO "
                 rows="4"
                 maxlength="1000"
+                bind:value={description}
                 required
             />
             <label for="communityOwner" class="pt-3 pb-3 text-sm font-semibold"> Community Owner <span class="font-normal text-zinc-500"> [Optional]  </span> </label>
@@ -173,27 +179,28 @@
                 class="bg-zinc-800 rounded-xl p-1 pb-2 px-3 outline-none text-sm"
                 placeholder="eg: @PavelDurov"
                 autocomplete="off"
+                bind:value={owner}
             />
             <label for="communityTypes" class="pt-3 pb-2 text-sm font-semibold"> Community Type </label>
             <div class="flex" id="communityTypes">
-                <RadioComponent {options} fontSize={16} legend='' bind:userSelected={radioValue}/>
+                <RadioComponent {options} fontSize={16} legend='' bind:userSelected={type}/>
             </div>
 
             <div class="pt-6 pb-3 text-sm">
                 <span class="text-sm font-semibold"> Community Tags </span>
                 <div class="flex flex-row flex-wrap w-full pt-4">
-                    {#each tags as tag}
+                    {#each TAGS as tag}
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
                         <!-- svelte-ignore a11y-no-static-element-interactions -->
                         <div class="p-1 lowercase">
-                            {#if radioValue == "channel"}
-                                {#if selectedTags.indexOf(tag) == -1}
+                            {#if type == "channel"}
+                                {#if !selectedTags.includes(tag)}
                                     <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap hover:bg-emerald-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {:else}
                                     <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap bg-emerald-400 text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {/if}
                             {:else}
-                                {#if selectedTags.indexOf(tag) == -1}
+                                {#if !selectedTags.includes(tag)}
                                     <span  on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap hover:bg-cyan-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
                                 {:else}
                                     <span  on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap bg-cyan-400 text-black overflow-scroll no-scrollbar"> {tag} </span>
@@ -203,17 +210,13 @@
                     {/each}
                 </div>
             </div>
-
+                <Button on:click={submitCommunity} disabled={submitting} class={`${type == 'channel' ? " hover:bg-emerald-400" : "hover:bg-cyan-400"} rounded-full px-2 py-0 bg-white text-black text-sm font-semibold`}> Save Changes </Button>
+                    <ul class="my-4">
+                        {#each errors as error}
+                            <li class="text-red-500 text-sm pt-2 pl-2 list-disc">{error}</li>
+                        {/each}
+                    </ul>
         </div>
-
-        <!-- FOOTER -->
-        <Dialog.Footer>
-            <Dialog.Close>
-                <div class={radioValue == "channel" ? "rounded-full px-2 py-0 bg-white text-black hover:bg-emerald-400" : "rounded-full px-2 py-0 bg-white text-black hover:bg-cyan-400"}>
-                    <Button on:click={(e) => submitCommunity()} disabled={foundDuplicateLink} class="text-sm font-semibold"> Save Changes </Button>
-                </div>
-            </Dialog.Close>
-        </Dialog.Footer>
     </Dialog.Content>
 </Dialog.Root>
 </div>

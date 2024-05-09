@@ -42,6 +42,7 @@
     "bits-ui": "^0.21.7",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.378.0",
+    "mongoose": "^8.3.4",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1"
   }
