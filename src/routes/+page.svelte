@@ -108,7 +108,7 @@
                 <!-- FILTERS -->
                 <div class="flex flex-row flex-wrap justify-center gap-1 overflow-scroll no-scrollbar pt-8">
                     {#each TAGS as tag}
-                        <div class="pr-0 py-1
+                        <div class="pr-0 py-1 cursor-pointer
                             md:pr-2 md:py-1
                         ">
                             <!-- svelte-ignore a11y-click-events-have-key-events -->
