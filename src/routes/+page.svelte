@@ -149,39 +149,25 @@
                         </Select.Content>
                     </Select.Root>
                 </div>
-            </div>
-
-            <!-- COMMUNITIES -->
-            {#if allCommunities.length > 0}
-                <div class="grid grid-cols-1 gap-5 pt-14 pb-48 px-10
-                    md:grid md:grid-cols-3 md:px-0
-                ">
-                    <!-- EACH COMMUNITY -->
-                    {#each allCommunities as community}
-                        {#if isChannels == "all"}
-                            {#if filterFeedTags.length == 0}
-                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
-                                    <EachCommunity {community}/>
-                                </a>                                                    
-                            {:else if allElementsInArray(filterFeedTags, community.tags)}
-                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
-                                    <EachCommunity {community}/>
-                                </a>                            
-                            {/if}
-                        {:else if isChannels == true}
-                            {#if community.type == "channel"}
+                <!-- COMMUNITIES -->
+                {#if allCommunities.length > 0}
+                    <div class="grid grid-cols-1 gap-5 pt-14 pb-48 px-10
+                        md:grid md:grid-cols-3 md:px-0
+                    ">
+                        <!-- EACH COMMUNITY -->
+                        {#each allCommunities as community}
+                            {#if isChannels == "all"}
                                 {#if filterFeedTags.length == 0}
-                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
-                                    <EachCommunity {community}/>
-                                </a>                                                    
+                                    <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                        <EachCommunity {community}/>
+                                    </a>                                                    
                                 {:else if allElementsInArray(filterFeedTags, community.tags)}
-                                <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
-                                    <EachCommunity {community}/>
-                                </a>                            
-                                {/if}                
-                            {/if}
-                        {:else if isChannels == false}
-                                {#if community.type == "group"}
+                                    <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                        <EachCommunity {community}/>
+                                    </a>                            
+                                {/if}
+                            {:else if isChannels == true}
+                                {#if community.type == "channel"}
                                     {#if filterFeedTags.length == 0}
                                     <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
                                         <EachCommunity {community}/>
@@ -192,14 +178,28 @@
                                     </a>                            
                                     {/if}                
                                 {/if}
-                            {/if}
-                        {/each}                    
-                </div>
-            {:else}
-                <div class="pt-40 pb-60 text-center w-full">
-                    <span class="text-md text-zinc-300"> Loading Communities... </span>
-                </div>
-            {/if}
+                            {:else if isChannels == false}
+                                    {#if community.type == "group"}
+                                        {#if filterFeedTags.length == 0}
+                                        <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                            <EachCommunity {community}/>
+                                        </a>                                                    
+                                        {:else if allElementsInArray(filterFeedTags, community.tags)}
+                                        <a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)} >
+                                            <EachCommunity {community}/>
+                                        </a>                            
+                                        {/if}                
+                                    {/if}
+                                {/if}
+                            {/each}                    
+                    </div>
+                {:else}
+                    <div class="pt-40 pb-60 text-center w-full">
+                        <span class="text-md text-zinc-300"> Loading Communities... </span>
+                    </div>
+                {/if}
+            </div>
+
 
 
             
