@@ -21,13 +21,14 @@ export const TAGS = [
     "Humor",
     "Politics",
     "Nature",
+    "Esoteric",
     "Literature",
     "e-Commerce",
     "Film / TV",
     "Fashion / Beauty",
     "Art / Design",
     "Games / Apps",
-    "unsorted",
+    "Unsorted",
     "untagged",
     "other"
 ];
