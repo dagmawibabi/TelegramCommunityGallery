@@ -43,7 +43,7 @@
                     {#if community.type == "channel"}
                         <div class="rounded-full border border-zinc-700 pb-1 px-3 text-sm line-clamp-1 whitespace-nowrap hover:bg-emerald-500 hover:text-black"> {tag} </div>
                     {:else}
-                        <div class="rounded-full border border-zinc-700 pb-1 px-3 text-sm hover:bg-cyan-500 hover:text-black"> {tag} </div>
+                        <div class="rounded-full border border-zinc-700 pb-1 px-3 text-sm line-clamp-1 whitespace-nowrap hover:bg-cyan-500 hover:text-black"> {tag} </div>
                     {/if}
                 </div>
             {/each}
