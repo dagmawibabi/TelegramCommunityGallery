@@ -2,6 +2,7 @@
 
     import * as Select from "$lib/components/ui/select";
     import Socials from '../components/socials.svelte';
+    import SignIn from '../components/signInButton.svelte'
     import AddCommunity from '../components/addCommunity.svelte';
     import EachCommunity from '../components/eachCommunity.svelte';
 	import Footer from '../components/footer.svelte';
@@ -96,8 +97,19 @@
             <div class="px-5
                 md:px-0
             ">
-                <!-- SOCIALS -->
-                <Socials />
+                
+                <div class="flex justify-between items-center">
+                    <!-- Left side Signin -->
+                    <div>
+                        <SignIn />
+                    </div>
+                
+                    <!-- Right side Socials -->
+                    <div>
+                        <Socials />
+                    </div>
+                </div>
+                
 
                 <!-- HEADER -->
                 <Header />
