@@ -10,6 +10,11 @@
 	import Header from '../components/header.svelte';
 	import { CircleX } from "lucide-svelte";
 
+    import { TAGS } from "$lib/constants.js";
+	import { onMount } from "svelte";
+
+    export let data;
+
     type Community = {
         name: string,
         link: string,
@@ -25,46 +30,23 @@
         allCommunities = data;
     })
 
-    async function getCommunities() {
-        let results = await axios({
-            method: 'get',
-            url: `https://telegramcommunitygalleryapi.onrender.com/getCommunities`,
-            withCredentials: false,
-        })
-        communities = results["data"]
-        allCommunitiesStore.set(communities)
-    }
-    getCommunities()
+    allCommunitiesStore.set(communities)
 
-    let tags = [
-    "Spiritual",
-    "Tech",
-    "News",
-    "Coding",
-    "Books",
-    "Company",
-    "School",
-    "Food",
-    "Pets",
-    "Music",
-    "Crafts",
-    "Travel",
-    "Science",
-    "Fitness",
-    "NSFW",
-    "Education",
-    "Photography",
-    "Humor",
-    "Politics",
-    "Nature",
-    "Literature",
-    "e-Commerce",
-    "Film / TV",
-    "Fashion / Beauty",
-    "Art / Design",
-    "Games / Apps",
-    "untagged"
-    ];
+    // async function getCommunities() {
+    //     let results = await axios({
+    //         method: 'get',
+    //         url: `https://telegramcommunitygalleryapi.onrender.com/getCommunities`,
+    //         withCredentials: false,
+    //     })
+    //     communities = results["data"]
+    //     allCommunitiesStore.set(communities)
+    // }
+    // getCommunities()
+
+
+    onMount(()=>{
+        allCommunitiesStore.set(data.allCommunities)
+    })
 
     let filterFeedTags = <string[]>[]
     filteredTagsStore.subscribe((data) => {
@@ -117,11 +99,11 @@
                 <Header />
 
                 <!-- ADD NEW COMMUNITY -->
-                <AddCommunity {communities} {getCommunities}/>
+                <AddCommunity />
 
                 <!-- FILTERS -->
                 <div class="flex flex-row flex-wrap justify-center gap-1 overflow-scroll no-scrollbar pt-8">
-                    {#each tags as tag}
+                    {#each TAGS as tag}
                         <div class="pr-0 py-1
                             md:pr-2 md:py-1
                         ">
