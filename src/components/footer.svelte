@@ -3,7 +3,7 @@
 
     import { visitorCountStore } from '../store/store';
 
-    let LOGLIP_API_KEY = "site_viqku2vjon"
+    let LOGLIB_API_KEY = "site_h0ug964ux5"
 
     // DateTime
     let date = new Date();
@@ -22,7 +22,7 @@
         const formattedDate = `${year}-${month}-${day}`;    
         let visitorCountResult = await axios({
             method: 'get',
-            url: `https://api.loglib.io/v1/insight?apiKey=${LOGLIP_API_KEY}&startDate=2023-08-10&endDate=${formattedDate}&timeZone=Africa/Addis_Ababa`,
+            url: `https://api.loglib.io/v1/insight?apiKey=${LOGLIB_API_KEY}&startDate=2023-08-10&endDate=${formattedDate}&timeZone=Africa/Addis_Ababa`,
             withCredentials: false,
         });
         visitorCountStore.set(visitorCountResult.data.insight.totalPageViews.current);        
