@@ -1,4 +1,4 @@
-# Telegram Community Gallery 🌟
+# ✨ Telegram Community Gallery ✨
 ![Screenshot](/static/Screenshot.jpg)
 
 **[Telegram Community Gallery](https://telegram.dagmawi.dev)** is a platform where users can discover and submit their favorite Telegram channels and groups, creating a vibrant space for community exploration. Whether you're a seasoned Telegram user or just diving into the world of Telegram communities, this platform is designed with you in mind. 😊
