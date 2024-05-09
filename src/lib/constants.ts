@@ -27,6 +27,7 @@ export const TAGS = [
     "Fashion / Beauty",
     "Art / Design",
     "Games / Apps",
+    "unsorted",
     "untagged",
     "other"
 ];
