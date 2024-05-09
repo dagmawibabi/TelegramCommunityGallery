@@ -4,6 +4,8 @@ export const TAGS = [
     "News",
     "Coding",
     "Books",
+    "Product",
+    "Startup",
     "Company",
     "School",
     "Food",
@@ -25,4 +27,5 @@ export const TAGS = [
     "Fashion / Beauty",
     "Art / Design",
     "Games / Apps",
+    "other"
 ];
