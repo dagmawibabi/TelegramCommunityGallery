@@ -26,6 +26,8 @@ export const TAGS = [
     "Charity",
     "NGO",
     "Club",
+    "FOSS",
+    "Dumps",
     "Gaming",
     "Language",
     "Governmental",
