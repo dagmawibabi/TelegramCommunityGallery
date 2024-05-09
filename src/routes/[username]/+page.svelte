@@ -5,7 +5,6 @@
 	import Socials from '../../components/socials.svelte';
 	import Header from '../../components/header.svelte';
 	import { onMount } from 'svelte';
-	// import Footer from '../../components/footer.svelte';
     export let data;
 
     type Community = {
@@ -19,9 +18,6 @@
 
     let currentCommunity = <Community>{}
     currentCommunity = data.community[0]
-
-
-
 </script>
 
 

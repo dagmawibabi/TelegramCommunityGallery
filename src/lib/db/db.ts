@@ -1,4 +1,3 @@
-// SECRET_MONGO_URI
 import mongoose, { Mongoose } from 'mongoose';
 import { SECRET_MONGO_URI } from '$env/static/private';
 
@@ -19,7 +18,6 @@ const dbConnect: () => Promise<void> = async () => {
     const db: Mongoose = await mongoose.connect(SECRET_MONGO_URI);
 
     connection.isConnected = db.connections[0].readyState;
-    console.log("DB Connected: ", connection.isConnected);
 };
 
 export { dbConnect };

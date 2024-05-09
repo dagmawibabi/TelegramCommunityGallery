@@ -1,11 +1,7 @@
-// import * as db from '$lib/server/database';
-
-
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ fetch }) {
-    let res = await fetch('/api/get-communities');
-    let data = await res.json()
-    console.log(data);
+    const res = await fetch('/api/get-communities');
+    const data = await res.json()
     
     return {		
         allCommunities: data

@@ -36,12 +36,12 @@
         <p class="pb-1 text-sm text-zinc-400 leading-relaxed line-clamp-3 overflow-scroll no-scrollbar py-2 group-hover:text-white"> {community.description} </p>
     </div>
 
-    <div class="flex pt-4 pb-0 pr-40 overflow-scroll no-scrollbar">
+    <div class="flex pt-4 pb-0 pr-40 line-clamp-1 overflow-scroll no-scrollbar">
         {#if community.tags.length > 0}            
             {#each community.tags.slice(0,3) as tag}
                 <div class="pr-1">
                     {#if community.type == "channel"}
-                        <div class="rounded-full border border-zinc-700 pb-1 px-3 text-sm hover:bg-emerald-500 hover:text-black"> {tag} </div>
+                        <div class="rounded-full border border-zinc-700 pb-1 px-3 text-sm line-clamp-1 whitespace-nowrap hover:bg-emerald-500 hover:text-black"> {tag} </div>
                     {:else}
                         <div class="rounded-full border border-zinc-700 pb-1 px-3 text-sm hover:bg-cyan-500 hover:text-black"> {tag} </div>
                     {/if}

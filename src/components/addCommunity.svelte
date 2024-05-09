@@ -24,7 +24,6 @@
     let errors: string[] = [ ]
     // let foundDuplicateLink = false
 
-	
 	const options = [
         {
 		    value: 'channel',
