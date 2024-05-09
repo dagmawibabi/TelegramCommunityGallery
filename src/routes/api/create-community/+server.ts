@@ -1,9 +1,10 @@
-import { json, redirect } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 import { Community } from '../../../models/community.model';
 
 export async function POST({ request,  }) {
     const body = await request.json()
-    console.log("The body: ",body)
+    body.link = body.link.toString().toLowerCase()
+    // console.log("The body: ",body)
     const newCommunity = new Community({...body})
 
     try {

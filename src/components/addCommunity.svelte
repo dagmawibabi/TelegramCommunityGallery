@@ -76,7 +76,7 @@
         }
 
         // CHECK DIPLICATE USERNAME
-        let community = await fetch(`/api/get-community?link=${link}`)
+        let community = await fetch(`/api/get-community?link=${link.toString().toLowerCase()}`)
         let res = await community.json()
 
         if(!res.length){
@@ -154,14 +154,18 @@
             <input 
                 id="communityLink"
                 class="bg-zinc-800 rounded-xl p-1 pb-2 px-3 outline-none text-sm"
-                placeholder="eg: @Durov"
+                placeholder="eg: @Durov or @+OZ9Ul_rSBAQ0MjNk "
                 autocomplete="off"
                 bind:value={link}
                 required
             />
-            <!-- {#if errors.includes('duplicate username')}
-                <span class="text-red-500 text-sm pt-2 pl-2"> Username is duplicate! </span>
-            {/if} -->
+            <div class="pl-4 pt-1">
+                <ul>
+                    {#each errors as error}
+                        <li class="text-red-500 text-sm list-disc">{error}</li>
+                    {/each}
+                </ul>
+            </div>
             <label for="communityDescription" class="pt-3 pb-3 text-sm font-semibold"> Community Description </label>
             <textarea 
                 id="communityDescription"
@@ -191,7 +195,7 @@
                     {#each TAGS as tag}
                         <!-- svelte-ignore a11y-click-events-have-key-events -->
                         <!-- svelte-ignore a11y-no-static-element-interactions -->
-                        <div class="p-1 lowercase">
+                        <div class="p-1 lowercase cursor-pointer">
                             {#if type == "channel"}
                                 {#if !selectedTags.includes(tag)}
                                     <span on:click={(e) => addRemoveTag(tag)} class="rounded-full border border-zinc-700 w-fit pb-1 px-3 line-clamp-1 whitespace-nowrap hover:bg-emerald-400 hover:text-black overflow-scroll no-scrollbar"> {tag} </span>
@@ -209,12 +213,7 @@
                     {/each}
                 </div>
             </div>
-                <Button on:click={submitCommunity} disabled={submitting} class={`${type == 'channel' ? " hover:bg-emerald-400" : "hover:bg-cyan-400"} rounded-full px-2 py-0 bg-white text-black text-sm font-semibold`}> Save Changes </Button>
-                    <ul class="my-4">
-                        {#each errors as error}
-                            <li class="text-red-500 text-sm pt-2 pl-2 list-disc">{error}</li>
-                        {/each}
-                    </ul>
+            <Button on:click={submitCommunity} disabled={submitting} class={`${type == 'channel' ? " hover:bg-emerald-400" : "hover:bg-cyan-400"} rounded-full px-2 py-0 bg-white text-black text-sm font-semibold`}> Save Changes </Button>
         </div>
     </Dialog.Content>
 </Dialog.Root>
