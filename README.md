@@ -12,6 +12,8 @@
 Telegram Community Gallery is built using the following technologies:
 
 - **Frontend**: [SvelteKit](https://kit.svelte.dev/) and [Tailwind](https://tailwindcss.com/)
+- **Icons**: [Lucide Icons](https://lucide.dev/)
+- **Component Library**: [Shadcn-Svelte](https://www.shadcn-svelte.com/)
 - **Backend**: [HonoJS](https://hono.dev/) 
 - **Database**: [MongoDB](https://www.mongodb.com/)
 

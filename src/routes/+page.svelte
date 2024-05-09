@@ -8,6 +8,7 @@
 	import axios from 'axios';
 	import { currentCommunityStore, allCommunitiesStore, filteredTagsStore } from '../store/store';
 	import Header from '../components/header.svelte';
+	import { CircleX } from "lucide-svelte";
 
     type Community = {
         name: string,
@@ -62,6 +63,7 @@
     "Fashion / Beauty",
     "Art / Design",
     "Games / Apps",
+    "untagged"
     ];
 
     let filterFeedTags = <string[]>[]
@@ -78,6 +80,11 @@
             }
         }
         // filterFeedTags = filterFeedTags;
+        filteredTagsStore.set(filterFeedTags)
+    }
+
+    function clearFilter() {
+        filterFeedTags = []
         filteredTagsStore.set(filterFeedTags)
     }
 
@@ -136,6 +143,11 @@
 
                         </div>
                     {/each}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <div class="flex items-center text-zinc-500 py-1 hover:text-white" on:click={(e) => clearFilter()}>
+                        <CircleX size={17} />
+                    </div>
                 </div>
 
                 <!-- GROUP OR CHANNEL FILTER -->
