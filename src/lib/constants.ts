@@ -23,6 +23,7 @@ export const TAGS = [
     "Nature",
     "Esoteric",
     "Literature",
+    "Quotes",
     "Charity",
     "NGO",
     "Club",
