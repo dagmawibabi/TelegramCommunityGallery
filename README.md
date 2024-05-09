@@ -1,5 +1,5 @@
 # Telegram Community Gallery 🌟
-**Telegram Community Gallery** is a platform where users can discover and submit their favorite Telegram channels and groups, creating a vibrant space for community exploration. Whether you're a seasoned Telegram user or just diving into the world of Telegram communities, this platform is designed with you in mind.
+**[Telegram Community Gallery](https://telegram.dagmawi.dev)** is a platform where users can discover and submit their favorite Telegram channels and groups, creating a vibrant space for community exploration. Whether you're a seasoned Telegram user or just diving into the world of Telegram communities, this platform is designed with you in mind. 😊
 
 
 ### Features 🎉
@@ -11,12 +11,12 @@
 ### Tech Stack 💻
 Telegram Community Gallery is built using the following technologies:
 
-- **Frontend**: SvelteKit and Tailwind
-- **Backend**: HonoJS 
-- **Database**: MongoDB
+- **Frontend**: [SvelteKit](https://kit.svelte.dev/) and [Tailwind](https://tailwindcss.com/)
+- **Backend**: [HonoJS](https://hono.dev/) 
+- **Database**: [MongoDB](https://www.mongodb.com/)
 
 ### Getting Started 🚀
-To get started with Telegram Community Gallery, simply visit our [Website](https://telegram.dagmawi.dev) and start exploring! If you'd like to contribute to the project or report any issues, check out our GitHub repository.
+To get started with Telegram Community Gallery, simply visit our [Website](https://telegram.dagmawi.dev) and start exploring! If you'd like to contribute to the project or report any issues, check out our [GitHub repository.](https://github.com/dagmawibabi/TelegramCommunityGallery)
 
 ### How to Contribute 🤝
 We welcome contributions from the community! Follow these steps to contribute:
@@ -30,7 +30,9 @@ We welcome contributions from the community! Follow these steps to contribute:
 For more detailed guidelines on contributing, please refer to our contribution guidelines.
 
 ### Feedback and Support 💌
-Have any questions, suggestions, or need support? Feel free to reach out to us in our discussions tab or open an issue on GitHub. Your feedback helps us make Telegram Community Gallery even better!
+Have any questions, suggestions, or need support? Feel free to reach out to us in our discussions tab or [open an issue](https://github.com/dagmawibabi/TelegramCommunityGallery/issues) on GitHub. Your feedback helps us make Telegram Community Gallery even better!
 
 ### License 📝
-Telegram Community Gallery is licensed under the MIT License.
+Telegram Community Gallery is licensed under the [MIT License](https://github.com/dagmawibabi/TelegramCommunityGallery?tab=MIT-1-ov-file).
+
+### Thank You and Enjoy! 🥰
