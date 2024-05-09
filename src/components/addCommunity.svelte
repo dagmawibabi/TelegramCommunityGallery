@@ -39,10 +39,10 @@
 	// export let getCommunities: Function;
 
 	function replaceTelegramLink(str: string) {
-		if (str.startsWith('t.me')) {
+		if (str.startsWith('t.me/')) {
 			return str.replace('t.me/', '@');
 		}
-		if (str.startsWith('https://t.me')) {
+		if (str.startsWith('https://t.me/')) {
 			return str.replace('https://t.me/', '@');
 		}
 		return str;
