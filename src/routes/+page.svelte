@@ -115,14 +115,14 @@
                             <!-- svelte-ignore a11y-no-static-element-interactions -->
                             {#if filterFeedTags.indexOf(tag) == -1}
                                 <span on:click={(e) => filterFeed(tag)} 
-                                    class="lowercase pb-1 bg-[#09090b] rounded-full border border-zinc-800 h-fit w-fit px-4 text-sm text-zinc-400 hover:bg-blue-500 hover:text-black line-clamp-1
+                                    class="lowercase pb-1 bg-[#09090b] rounded-full border border-zinc-800 h-fit w-fit px-4 text-sm text-zinc-400 hover:bg-blue-500 cursor-pointer hover:text-black line-clamp-1
                                         md:text-base md:px-3
                                     "> 
                                     {tag} 
                                 </span>
                             {:else}
                                 <span on:click={(e) => filterFeed(tag)} 
-                                    class="lowercase pb-1 bg-blue-500 rounded-full border border-zinc-800 h-fit w-fit px-3 text-base text-black font-semibold  hover:text-black line-clamp-1"> 
+                                    class="lowercase pb-1 bg-blue-500 rounded-full border border-zinc-800 h-fit w-fit px-3 text-base text-black font-semibold cursor-pointer hover:text-black line-clamp-1"> 
                                     {tag} 
                                 </span>
                             {/if}
