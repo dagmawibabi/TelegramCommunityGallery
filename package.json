@@ -38,6 +38,7 @@
     "svelte-preprocess"
   ],
   "dependencies": {
+    "@auth/sveltekit": "^1.0.1",
     "@loglib/tracker": "^0.8.0",
     "axios": "^1.6.8",
     "bits-ui": "^0.21.7",
