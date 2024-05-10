@@ -21,8 +21,11 @@ export const handle: Handle = async ({ event, resolve }) => {
         clientSecret: GITHUB_CLIENT_SECRET
     });
 
+    
     const authConfig = {
-        providers: [githubProvider]
+        providers: [githubProvider],
+        trustHost: true,
+        secret: "true"
     };
 
     // Initialize authentication middleware
