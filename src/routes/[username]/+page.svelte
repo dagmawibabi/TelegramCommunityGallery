@@ -1,7 +1,8 @@
 <script lang="ts">
     import { Rss, Users } from 'lucide-svelte';
 
-    import { currentCommunityStore } from "../../store/store";
+	import { allCommunitiesStore } from "../../store/store";
+
 	import Socials from '../../components/socials.svelte';
 	import Header from '../../components/header.svelte';
 	import { onMount } from 'svelte';
@@ -18,10 +19,22 @@
 
     let currentCommunity = <Community>{}
     currentCommunity = data.community[0]
+
+    let communities: Community[] = []
+    
+    let allCommunities = <Community[]>[]
+    allCommunitiesStore.subscribe((data) => {
+        allCommunities = data;
+        // allCommunitiesStore.set(communities)
+    })
+
+    onMount(()=>{
+        allCommunitiesStore.set(data.allCommunities)
+    })
 </script>
 
 <svelte:head>
-    <title> Telegram Community Gallery </title> 
+    <title> {currentCommunity.name} </title> 
 </svelte:head>
 
 
