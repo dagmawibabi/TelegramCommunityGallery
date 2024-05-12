@@ -1,13 +1,10 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
     let telegramWidgetLoaded = false;
     let userData = null;
-    const dispatch = createEventDispatcher();
 
     // Function to handle Telegram authentication
     function onTelegramAuth(user) {
         userData = user;
-        dispatch('auth', { user }); // Trigger a custom event
         alert(
             'Logged in as ' +
             user.first_name +
@@ -43,11 +40,6 @@
     // Load Telegram widget when component is mounted
     import { onMount } from 'svelte';
     onMount(loadTelegramWidget);
-
-    // Listen for the custom 'auth' event
-    window.addEventListener('auth', event => {
-        userData = event.detail.user;
-    });
 </script>
 
 <div>
