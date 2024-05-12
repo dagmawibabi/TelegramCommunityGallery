@@ -19,19 +19,19 @@
     }
 
     async function loadTelegramWidget() {
-        telegramWidgetLoaded = true;
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://telegram.org/js/telegram-widget.js?22';
-        script.dataset.telegramLogin = 'BasketoDevBot';
-        script.dataset.onauth = 'onTelegramAuth(user)';
-        script.dataset.requestAccess = 'write';
-        script.onerror = () => {
-            console.error('Error loading Telegram Login script');
-            // Display an error message to the user
-        };
-        document.querySelector('#telegram-login-widget').appendChild(script);
-    }
+    telegramWidgetLoaded = true;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://telegram.org/js/telegram-widget.js?22';
+    script.dataset.telegramLogin = 'BasketoDevBot';
+    script.dataset.onauth = 'onTelegramAuth(user)';
+    script.dataset.requestAccess = 'write';
+    script.onerror = () => {
+      console.error('Error loading Telegram Login script');
+      // Display an error message to the user
+    };
+    document.querySelector('#telegram-login-widget').appendChild(script);
+  }
 
     // Load Telegram widget when component is mounted
     import { onMount } from 'svelte';
@@ -40,29 +40,28 @@
 
 <div>
     {#await telegramWidgetLoaded}
-        <div class="spinner"></div>
+      <div class="spinner"></div>
     {:then}
-        <div class="flex gap-3">
-            {#if $page.data.session}
-                {#if $page.data.session.user?.image}
-                    <img src={$page.data.session.user.image} alt="profile image" class="rounded-full w-7 h-7" />
-                {/if}
-                <button class="hover:text-blue-500 text-sm" on:click={() => signOut()}>Sign Out</button>
-            {:else}
-            <div class="auth-buttons">
-                <div id="telegram-login-widget"></div>
-                {#if !$page.data.session && !$page.data.sessionWithTelegram}
-                        <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>
-                            Sign In with GitHub
-                        </button>
-                    {/if}
-            </div>
+      <div class="flex gap-3">
+        {#if $page.data.session}
+          {#if $page.data.session.user?.image}
+            <img src={$page.data.session.user.image} alt="profile image" class="rounded-full w-7 h-7" />
+          {/if}
+          <button class="hover:text-blue-500 text-sm" on:click={() => signOut()}>Sign Out</button>
+        {:else}
+          <div class="auth-buttons">
+            <div id="telegram-login-widget"></div>
+            {#if !$page.data.session && !$page.data.sessionWithTelegram} <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>
+                Sign In with GitHub
+              </button>
             {/if}
-        </div>
+          </div>
+        {/if}
+      </div>
     {:catch error}
-        <p style="color: red">Error loading Telegram Login: {error.message}</p>
+      <p style="color: red">Error loading Telegram Login: {error.message}</p>
     {/await}
-</div>
+  </div>
 
 <style>
     .auth-buttons {
