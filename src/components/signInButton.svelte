@@ -32,6 +32,11 @@
         document.querySelector('#telegram-login-widget').appendChild(script);
     }
 
+    function logout() {
+        userData = null;
+        // Add code here to perform logout actions, if any
+    }
+
     // Load Telegram widget when component is mounted
     import { onMount } from 'svelte';
     onMount(loadTelegramWidget);
@@ -48,6 +53,7 @@
                 {#if userData.username}
                     <p>Username: @{userData.username}</p>
                 {/if}
+                <button on:click={logout}>Logout</button>
             </div>
         {:else}
             <div class="flex gap-3 mt-5">
