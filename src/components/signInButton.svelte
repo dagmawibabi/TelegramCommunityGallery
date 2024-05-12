@@ -38,7 +38,7 @@
     onMount(loadTelegramWidget);
 </script>
 
-<div class="auth-buttons">
+<div>
     {#await telegramWidgetLoaded}
         <div class="spinner"></div>
     {:then}
@@ -49,10 +49,13 @@
                 {/if}
                 <button class="hover:text-blue-500 text-sm" on:click={() => signOut()}>Sign Out</button>
             {:else}
+            <div class="auth-buttons">
                 <div id="telegram-login-widget"></div>
                 <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>
                     Sign In with GitHub
                 </button>
+            </div>
+               
 
             {/if}
         </div>
@@ -70,12 +73,14 @@
         top: 20px;
         left: 20px;
         width: calc(100% - 40px);
+        
     }
 
     #telegram-login-widget .telegram-login-button {
         width: 30px;
         height: 30px;
         margin-right: 10px;
+        box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5);
     }
 
     .sign-in-button {
