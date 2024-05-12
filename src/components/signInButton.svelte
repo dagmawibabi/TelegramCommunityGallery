@@ -36,6 +36,14 @@
         border-radius: 5px;
         box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5);
     }
+    .test{
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-right: 20px;
+        height: 30px;
+        background-color: rgb(45, 45, 45);
+        box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5);
+    }
 </style>
 
 <div class="auth-buttons">
@@ -47,7 +55,7 @@
             <button class="hover:text-blue-500 text-sm" on:click={() => signOut()}>Sign Out</button>
         </div>
     {:else}
-        
+    <button class="test" on:click={onTelegramAuth}>test</button>
         <!-- Embed Telegram login widget -->
         <div id="telegram-login-widget"></div>
         <script async src="https://telegram.org/js/telegram-widget.js?22" 
@@ -58,5 +66,6 @@
         </script>
 
         <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>Sign In with GitHub</button>
+        
     {/if}
 </div>
