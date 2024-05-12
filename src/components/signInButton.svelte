@@ -9,17 +9,32 @@
 </script>
 
 <style>
-    /* Adjust parent container to flex layout */
+   
     .auth-buttons {
         display: flex;
-        align-items: center; /* Align items vertically */
+        align-items: center; 
+        justify-content: space-between; 
+        position:absolute; 
+        top: 20px; 
+        left: 20px;
+        width: calc(100% - 40px); 
     }
 
-    /* Adjust size of Telegram button */
+   
     #telegram-login-widget .telegram-login-button {
-        width: 30px; /* Set desired width */
-        height: 30px; /* Set desired height */
-        margin-right: 10px; /* Add some margin for spacing */
+        width: 30px;
+        height: 30px; 
+        margin-right: 10px;
+    }
+
+    .sign-in-button {
+        margin-left: auto; 
+        background-color: rgb(45, 45, 45);
+        height: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.5);
     }
 </style>
 
@@ -32,15 +47,16 @@
             <button class="hover:text-blue-500 text-sm" on:click={() => signOut()}>Sign Out</button>
         </div>
     {:else}
-		<button class="hover:text-blue-500 text-sm" on:click={() => signIn('github')}>Sign In</button>
+        
         <!-- Embed Telegram login widget -->
         <div id="telegram-login-widget"></div>
         <script async src="https://telegram.org/js/telegram-widget.js?22" 
-                data-telegram-login="BasketoDevBot"
+                data-telegram-login="BasketoDevBot" 
+                data-size=20
                 data-onauth="onTelegramAuth(user)" 
                 data-request-access="write">
-				class="rounded-md p-2 bg-blue-500 text-white hover:bg-blue-600">
         </script>
-        
+
+        <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>Sign In with GitHub</button>
     {/if}
 </div>
