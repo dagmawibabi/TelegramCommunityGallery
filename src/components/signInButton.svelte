@@ -51,14 +51,12 @@
             {:else}
             <div class="auth-buttons">
                 <div id="telegram-login-widget"></div>
-                {#if !$page.data.session}
+                {#if !$page.data.session && !$page.data.sessionWithTelegram}
                         <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>
                             Sign In with GitHub
                         </button>
                     {/if}
             </div>
-               
-
             {/if}
         </div>
     {:catch error}
