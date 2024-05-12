@@ -24,7 +24,7 @@
         script.async = true;
         script.src = 'https://telegram.org/js/telegram-widget.js?22';
         script.dataset.telegramLogin = 'BasketoDevBot';
-        script.dataset.onauth = 'onTelegramAuth';
+        script.dataset.onauth = 'onTelegramAuth(user)';
         script.dataset.requestAccess = 'write';
         script.onerror = () => {
             console.error('Error loading Telegram Login script');
@@ -51,9 +51,11 @@
             {:else}
             <div class="auth-buttons">
                 <div id="telegram-login-widget"></div>
-                <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>
-                    Sign In with GitHub
-                </button>
+                {#if !$page.data.session}
+                        <button class="sign-in-button hover:text-blue-500 text-sm" on:click={() => signIn('github')}>
+                            Sign In with GitHub
+                        </button>
+                    {/if}
             </div>
                
 
