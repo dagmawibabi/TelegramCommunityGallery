@@ -17,7 +17,7 @@ COPY . .
 RUN bun run build
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 5173
 
 # Define the command to run the app
-CMD ["bun", "run", "dev"]
+CMD ["bun", "run", "dev --host"]
