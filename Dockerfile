@@ -8,11 +8,11 @@ WORKDIR /app
 COPY package.json bun.lockb ./
 COPY .env .env
 
-# Install dependencies using bun
-RUN bun install
-
 # Copy the rest of the application code
 COPY . .
+
+# Install dependencies using bun
+RUN bun install
 
 # Build the SvelteKit app
 RUN bun run build
