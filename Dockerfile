@@ -20,4 +20,4 @@ RUN bun run build
 EXPOSE 5173
 
 # Define the command to run the app
-CMD ["bun", "run", "dev", "--host"]
+CMD ["bun", "run", "dev"]
