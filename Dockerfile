@@ -20,4 +20,4 @@ RUN bun run build
 EXPOSE 3000
 
 # Define the command to run the app
-CMD ["bun", "run", "preview"]
+CMD ["bun", "run", "dev"]
