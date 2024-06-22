@@ -1,4 +1,5 @@
 export const TAGS = [
+    "AI/ML"
     "Spiritual",
     "Tech",
     "News",
