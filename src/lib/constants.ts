@@ -44,6 +44,7 @@ export const TAGS = [
 	'Governmental',
 	'e-Commerce',
 	'Cybersecurity',
+	'Hacking',
 	'AI / ML',
 	'Film / TV',
 	'Fashion / Beauty',
