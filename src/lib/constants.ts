@@ -1,5 +1,4 @@
 export const TAGS = [
-	'AI/ML',
 	'Spiritual',
 	'Tech',
 	'News',
@@ -44,6 +43,7 @@ export const TAGS = [
 	'Language',
 	'Governmental',
 	'e-Commerce',
+	'AI / ML',
 	'Film / TV',
 	'Fashion / Beauty',
 	'Art / Design',
