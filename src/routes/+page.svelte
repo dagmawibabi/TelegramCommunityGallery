@@ -16,89 +16,6 @@
 
 	export let data;
 
-	const dummyCommunities = [
-		{
-			name: 'Awesome Svelte Community',
-			link: 'awesome-svelte',
-			description: 'A friendly place for Svelte developers of all levels.',
-			owner: 'svelte_fanatic',
-			tags: ['svelte', 'javascript', 'frontend', 'community'],
-			type: 'group'
-		},
-		{
-			name: 'Rustaceans United',
-			link: 'rustaceans',
-			description: 'Discuss everything about the Rust programming language.',
-			owner: 'ferris_the_crab',
-			tags: ['rust', 'programming', 'backend', 'community'],
-			type: 'group'
-		},
-		{
-			name: 'Python Data Science Hub',
-			link: 'python-data',
-			description: 'All things Python for data analysis and machine learning.',
-			owner: 'data_wizard',
-			tags: ['python', 'data science', 'machine learning', 'ai'],
-			type: 'channel'
-		},
-		{
-			name: 'Vue.js Developers',
-			link: 'vue-devs',
-			description: 'Sharing tips, tricks, and news about Vue.js.',
-			owner: 'vue_master',
-			tags: ['vue', 'javascript', 'frontend'],
-			type: 'group'
-		},
-		{
-			name: 'GoLang Gurus',
-			link: 'go-gurus',
-			description: 'Deep dives into the Go programming language and its ecosystem.',
-			owner: 'go_pro',
-			tags: ['go', 'golang', 'backend', 'programming'],
-			type: 'channel'
-		},
-		{
-			name: 'Cybersecurity Insights',
-			link: 'cybersec-info',
-			description: 'Latest news and discussions on cybersecurity threats and solutions.',
-			owner: 'security_expert',
-			tags: ['security', 'cybersecurity', 'infosec'],
-			type: 'channel'
-		},
-		{
-			name: 'React Rockstars',
-			link: 'react-rocks',
-			description: 'A community for passionate React.js developers.',
-			owner: 'react_dev',
-			tags: ['react', 'javascript', 'frontend', 'community'],
-			type: 'group'
-		},
-		{
-			name: 'Blockchain Explorers',
-			link: 'blockchain-etc',
-			description: 'Exploring the world of blockchain technology and cryptocurrencies.',
-			owner: 'crypto_enthusiast',
-			tags: ['blockchain', 'crypto', 'web3'],
-			type: 'group'
-		},
-		{
-			name: 'AI and Robotics Lab',
-			link: 'ai-robotics',
-			description: 'Discussions and advancements in artificial intelligence and robotics.',
-			owner: 'ai_researcher',
-			tags: ['ai', 'artificial intelligence', 'robotics', 'technology'],
-			type: 'channel'
-		},
-		{
-			name: 'Full Stack Web Devs',
-			link: 'fullstack-life',
-			description: 'Connecting full-stack developers and sharing resources.',
-			owner: 'fullstack_guru',
-			tags: ['javascript', 'frontend', 'backend', 'fullstack'],
-			type: 'group'
-		}
-	];
-
 	type Community = {
 		name: string;
 		link: string;
@@ -117,7 +34,7 @@
 	allCommunitiesStore.set(communities);
 
 	onMount(() => {
-		allCommunitiesStore.set(dummyCommunities);
+		allCommunitiesStore.set(data.allCommunities);
 	});
 
 	let filterFeedTags = <string[]>[];
