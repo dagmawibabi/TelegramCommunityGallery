@@ -60,22 +60,23 @@
 	}
 
 	function allElementsInArray(arr1: string[], arr2: string[]) {
-		return arr1.every((item) => arr2.includes(item));
+		const lowerArr1 = arr1.map((item) => item.toLowerCase());
+		const lowerArr2 = arr2.map((item) => item.toLowerCase());
+		return lowerArr1.every((item) => lowerArr2.includes(item));
 	}
 
-	let isChannels: any = 'all';
+	// Define isChannels as a writable store
+	const isChannels = writable('all');
 	const searchTerm = writable('');
 
+	// Define the derived store
 	const filteredCommunities = derived(
-		[allCommunitiesStore, filteredTagsStore, searchTerm, writable(isChannels)],
+		[allCommunitiesStore, filteredTagsStore, searchTerm, isChannels],
 		([$allCommunities, $filteredTags, $searchTerm, $isChannels]) => {
 			return $allCommunities.filter((community) => {
 				const matchesTags =
 					$filteredTags.length === 0 || allElementsInArray($filteredTags, community.tags);
-				const matchesType =
-					$isChannels === 'all' ||
-					($isChannels === true && community.type === 'channel') ||
-					($isChannels === false && community.type === 'group');
+				const matchesType = $isChannels === community.type || $isChannels === 'all';
 				const matchesSearch =
 					$searchTerm === '' ||
 					community.name.toLowerCase().includes($searchTerm.toLowerCase()) ||
@@ -180,7 +181,7 @@
 								value="All"
 								class="hover:bg-zinc-600 text-sm"
 								on:click={(e) => {
-									isChannels = 'all';
+									isChannels.set('all');
 								}}
 							>
 								All
@@ -189,7 +190,7 @@
 								value="Channels"
 								class="hover:bg-zinc-600 text-sm"
 								on:click={(e) => {
-									isChannels = true;
+									isChannels.set('channel');
 								}}
 							>
 								Channels
@@ -198,7 +199,7 @@
 								value="Groups"
 								class="hover:bg-zinc-600 text-sm"
 								on:click={(e) => {
-									isChannels = false;
+									isChannels.set('group');
 								}}
 							>
 								Groups
