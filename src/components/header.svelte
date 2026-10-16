@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { allCommunitiesStore } from '../store/store';
-	import Footer from './footer.svelte';
 
     type Community = {
         name: string,
@@ -33,8 +32,7 @@
     </a>
     <div class="pt-3 pb-2">
         <p class="text-sm text-zinc-400"> Here are some of the most incredible channels and groups submitted by the public. 
-            <br class="hidden md:block"/>  
-            <Footer />
+            <br class="hidden md:block"/>
         </p>
     </div>
 </div>

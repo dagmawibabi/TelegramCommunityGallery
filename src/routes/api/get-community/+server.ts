@@ -1,10 +1,15 @@
 import { json } from '@sveltejs/kit';
-import { Community } from '../../../models/community.model';
+import { mapCommunity } from '$lib/types';
+import type { RequestHandler } from './$types';
 
+export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
+	const link = url.searchParams.get('link');
 
-export async function GET({ request, url }) {
-	const link = url.searchParams.get('link')
-    const fetchedCommunity = await Community.find({ link });
-    // console.log(fetchedCommunity)
-	return json(fetchedCommunity);
-}
+	const { data, error } = await supabase.from('communities').select().eq('link', link ?? '');
+
+	if (error) {
+		return json({ status: 500, body: error.message }, { status: 500 });
+	}
+
+	return json((data ?? []).map(mapCommunity));
+};

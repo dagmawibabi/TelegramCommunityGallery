@@ -8,16 +8,11 @@
 	// import axios from 'axios';
 
 	import { TAGS } from '$lib/constants';
-	// import { error, redirect } from '@sveltejs/kit';
+	import { page } from '$app/stores';
+	import type { Community } from '$lib/types';
 
-	interface Community {
-		name: String;
-		link: String;
-		description: String;
-		owner: String | null | undefined;
-		tags: String[];
-		type: String;
-	}
+	$: supabase = $page.data.supabase;
+	$: claims = $page.data.claims;
 
 	// export let communities: Community[];
 	let errors: string[] = [];
@@ -57,10 +52,11 @@
 	$: if (owner) owner = replaceTelegramLink(owner!);
 
 	let description = '';
-	let selectedTags: String[] = [];
+	let selectedTags: string[] = [];
 	let type = '';
+	let imageFile: FileList | undefined;
 
-	function addRemoveTag(tag: String) {
+	function addRemoveTag(tag: string) {
 		if (selectedTags.indexOf(tag) == -1) {
 			selectedTags.push(tag);
 		} else {
@@ -72,25 +68,54 @@
 		selectedTags = selectedTags;
 	}
 
+	async function uploadImage(): Promise<string | null> {
+		const file = imageFile?.[0];
+		if (!file || !claims?.sub || !supabase) return null;
+
+		const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg';
+		const path = `${claims.sub}/${crypto.randomUUID()}.${ext}`;
+		const { error } = await supabase.storage.from('community-images').upload(path, file, {
+			cacheControl: '3600',
+			upsert: false
+		});
+
+		if (error) {
+			throw error;
+		}
+
+		const { data } = supabase.storage.from('community-images').getPublicUrl(path);
+		return data.publicUrl;
+	}
+
 	async function submitCommunity() {
 		errors = [];
 		submitting = true;
 
-		let newCommunity: Community = {
-			name,
-			link,
-			description,
-			owner,
-			tags: selectedTags.length > 0 ? selectedTags : ['untagged'],
-			type: type
-		};
+		if (!claims) {
+			errors = ['Please sign in to submit a community'];
+			submitting = false;
+			return;
+		}
 
-		// CHECK DIPLICATE USERNAME
-		let community = await fetch(`/api/get-community?link=${link.toString().toLowerCase()}`);
-		let res = await community.json();
+		if (!name || !link || !description || !type) {
+			errors = ['Please fill in name, link, description, and type'];
+			submitting = false;
+			return;
+		}
 
-		if (!res.length) {
-			let results = await fetch('/api/create-community', {
+		try {
+			const image_url = await uploadImage();
+			const newCommunity: Community = {
+				name,
+				link: link.toString().toLowerCase(),
+				description,
+				owner,
+				tags: selectedTags.length > 0 ? selectedTags : ['untagged'],
+				type,
+				image_url
+			};
+
+			const results = await fetch('/api/create-community', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -99,21 +124,16 @@
 			});
 			const re = await results.json();
 
-			if (re.error) {
-				errors.push('Error creating community');
-				errors = errors;
-				console.log(re.body);
+			if (!results.ok || re.error) {
+				errors = [re.body || 'Error creating community'];
 			} else {
-				// Please find something reasonable
 				window.location.reload();
-				console.log(re);
 			}
-		} else {
-			errors.push('duplicate username');
-			errors = errors;
+		} catch (error) {
+			console.error(error);
+			errors = ['Error uploading image or creating community'];
 		}
 
-		// communities = results["data"]
 		selectedTags = [];
 		submitting = false;
 	}
@@ -198,6 +218,19 @@
 					autocomplete="off"
 					bind:value={owner}
 				/>
+				<label for="communityImage" class="pt-3 pb-3 text-sm font-semibold">
+					Community Image <span class="font-normal text-zinc-500"> [Optional] </span>
+				</label>
+				<input
+					id="communityImage"
+					class="bg-zinc-800 rounded-xl p-1 pb-2 px-3 outline-none text-sm file:mr-3 file:rounded-full file:border-0 file:bg-zinc-700 file:px-3 file:py-1 file:text-xs file:text-zinc-200"
+					type="file"
+					accept="image/*"
+					bind:files={imageFile}
+				/>
+				{#if !claims}
+					<p class="pt-3 text-sm text-amber-400">Sign in to submit a community and upload an image.</p>
+				{/if}
 				<label for="communityTypes" class="pt-3 pb-2 text-sm font-semibold"> Community Type </label>
 				<div class="flex" id="communityTypes">
 					<RadioComponent {options} fontSize={16} legend="" bind:userSelected={type} />
@@ -247,7 +280,7 @@
 				</div>
 				<Button
 					on:click={submitCommunity}
-					disabled={submitting}
+					disabled={submitting || !claims}
 					class={`${type == 'channel' ? ' hover:bg-emerald-400' : 'hover:bg-cyan-400'} rounded-full px-2 py-0 bg-white text-black text-sm font-semibold`}
 				>
 					Save Changes

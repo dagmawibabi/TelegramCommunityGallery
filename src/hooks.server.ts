@@ -1,35 +1,30 @@
-import { type Handle } from "@sveltejs/kit";
-import { dbConnect } from '$lib/db/db';
-import { SvelteKitAuth } from '@auth/sveltekit';
-import GitHub from "@auth/sveltekit/providers/github";
+import { createServerClient } from '@supabase/ssr';
+import { type Handle } from '@sveltejs/kit';
+import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY } from '$env/static/public';
 
-
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from '$env/static/private';
-
-// Connect DB
 export const handle: Handle = async ({ event, resolve }) => {
-	
-    try {
-        await dbConnect();
-        console.log("DB connected");
-    } catch (error) {
-        console.error("DB connection error:", error);
-    }
+	event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY, {
+		cookies: {
+			getAll: () => event.cookies.getAll(),
+			setAll: (cookiesToSet, headers) => {
+				const secure =
+					event.url.protocol === 'https:' || event.url.hostname === 'telegram.dagmawi.dev';
+				cookiesToSet.forEach(({ name, value, options }) => {
+					event.cookies.set(name, value, { ...options, path: '/', secure });
+				});
+				if (headers && Object.keys(headers).length > 0) {
+					event.setHeaders(headers);
+				}
+			}
+		}
+	});
 
-    const githubProvider = GitHub({
-        clientId: GITHUB_CLIENT_ID,
-        clientSecret: GITHUB_CLIENT_SECRET
-    });
+	const { data: claimsData } = await event.locals.supabase.auth.getClaims();
+	event.locals.claims = claimsData?.claims ?? null;
 
-    
-    const authConfig = {
-        providers: [githubProvider],
-        trustHost: true,
-        secret: "true"
-    };
-
-    // Initialize authentication middleware
-    const auth = SvelteKitAuth(authConfig);
-
-    return auth.handle({ event, resolve });
+	return resolve(event, {
+		filterSerializedResponseHeaders(name) {
+			return name === 'content-range' || name === 'x-supabase-api-version';
+		}
+	});
 };

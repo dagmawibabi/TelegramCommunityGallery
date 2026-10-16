@@ -1,45 +1,52 @@
-<script>
-    import axios from 'axios';
+<script lang="ts">
+	import { Github, Send } from 'lucide-svelte';
+	import { allCommunitiesStore } from '../store/store';
 
-    import { visitorCountStore } from '../store/store';
+	type Community = {
+		name: string;
+		link: string;
+		description: string;
+		owner: string | null | undefined;
+		tags: string[];
+		type: string;
+	};
 
-    let LOGLIB_API_KEY = "site_h0ug964ux5"
+	let allCommunities = <Community[]>[];
+	const year = new Date().getFullYear();
 
-    // DateTime
-    let date = new Date();
-    let humanReadableDate = date.toDateString();
-
-    // Get and Set Visitor Count 
-    let visitorCount = 0;
-    visitorCountStore.subscribe((data) => {
-        visitorCount = data;
-    })
-    async function getVisitorCount() {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); 
-        const day = String(currentDate.getDate() + 1).padStart(2, '0');
-        const formattedDate = `${year}-${month}-${day}`;    
-        let visitorCountResult = await axios({
-            method: 'get',
-            url: `https://api.loglib.io/v1/insight?apiKey=${LOGLIB_API_KEY}&startDate=2023-08-10&endDate=${formattedDate}&timeZone=Africa/Addis_Ababa`,
-            withCredentials: false,
-        });
-        visitorCountStore.set(visitorCountResult.data.insight.totalPageViews.current);        
-    }
-    getVisitorCount()
-    
+	allCommunitiesStore.subscribe((data) => {
+		allCommunities = data;
+	});
 </script>
 
-<span class="hidden md:block">
-    This gallery has been visited <span class="text-white" > {visitorCount} times </span> and was made with love by <a href="https://www.dagmawibabi.com" class="text-white underline underline-offset-4 hover:text-blue-500 hover:underline"> Dagmawi Babi</a>.
-</span>
+<footer class="px-5 pb-10 pt-6 md:px-0">
+	<div
+		class="mx-auto flex w-full max-w-4xl flex-col gap-4 rounded-2xl border border-zinc-800/80 bg-black/40 px-5 py-5 backdrop-blur md:flex-row md:items-center md:justify-between"
+	>
+		<div>
+			<p class="text-sm font-semibold text-zinc-100">Telegram Community Gallery</p>
+			<p class="pt-1 text-sm text-zinc-400">
+				Open directory for discovering Telegram channels and groups.
+			</p>
+		</div>
 
-<!-- <div class="absolute left-0 right-0 bottom-0 justify-center text-zinc-300 text-center pb-10 text-lg">
-    <span class=""> 
-        This gallery has been visited <span > {visitorCount} </span> times. 🤍 
-    </span>
-    <span>
-        {humanReadableDate} &copy; Dagmawi Babi
-    </span>
-</div> -->
+		<div class="flex flex-wrap items-center gap-4 text-sm text-zinc-400">
+			<span>{allCommunities.length} listed</span>
+			<a
+				href="https://github.com/dagmawibabi/TelegramCommunityGallery"
+				class="inline-flex items-center gap-2 transition hover:text-blue-400"
+			>
+				<Github size={16} />
+				GitHub
+			</a>
+			<a
+				href="https://t.me/Dagmawi_Babi"
+				class="inline-flex items-center gap-2 transition hover:text-cyan-400"
+			>
+				<Send size={16} />
+				Telegram
+			</a>
+			<span class="text-zinc-500">{year}</span>
+		</div>
+	</div>
+</footer>

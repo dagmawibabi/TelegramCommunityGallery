@@ -1,17 +1,45 @@
 import { json } from '@sveltejs/kit';
-import { Community } from '../../../models/community.model';
+import type { RequestHandler } from './$types';
 
-export async function POST({ request,  }) {
-    const body = await request.json()
-    body.link = body.link.toString().toLowerCase()
-    // console.log("The body: ",body)
-    const newCommunity = new Community({...body})
+export const POST: RequestHandler = async ({ request, locals: { supabase, claims } }) => {
+	if (!claims) {
+		return json({ error: true, status: 401, body: 'Sign in required' }, { status: 401 });
+	}
 
-    try {
-        await newCommunity.save();
-        return json({ status: 200, body: "Successfully created community"});
-      } catch (error) {
-        console.error(error);
-        return json({ status: 500, body: "Error creating document"});
-      }
-}
+	const body = await request.json();
+	const link = String(body.link ?? '')
+		.toLowerCase()
+		.trim();
+
+	const payload = {
+		name: String(body.name ?? '').trim(),
+		link,
+		description: String(body.description ?? ''),
+		owner: body.owner ? String(body.owner) : '',
+		tags: Array.isArray(body.tags) && body.tags.length > 0 ? body.tags : ['untagged'],
+		type: String(body.type ?? ''),
+		image_url: body.image_url ? String(body.image_url) : null,
+		created_by: claims.sub
+	};
+
+	if (!payload.name || !payload.link || (payload.type !== 'channel' && payload.type !== 'group')) {
+		return json({ error: true, status: 400, body: 'Missing required fields' }, { status: 400 });
+	}
+
+	const { error } = await supabase.from('communities').insert(payload);
+
+	if (error) {
+		console.error(error);
+		const duplicate = error.code === '23505';
+		return json(
+			{
+				error: true,
+				status: duplicate ? 409 : 500,
+				body: duplicate ? 'duplicate username' : 'Error creating document'
+			},
+			{ status: duplicate ? 409 : 500 }
+		);
+	}
+
+	return json({ status: 200, body: 'Successfully created community' });
+};

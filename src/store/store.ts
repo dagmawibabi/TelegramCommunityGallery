@@ -1,13 +1,5 @@
 import { writable } from 'svelte/store';
-
-type Community = {
-    name: string,
-    link: string,
-    description: string,
-    owner: string | null | undefined,
-    tags: string[],
-    type: string,
-};
+import type { Community } from '$lib/types';
 
 export const currentCommunityStore = writable(<Community>{});
 export const allCommunitiesStore = writable(<Community[]>[]);

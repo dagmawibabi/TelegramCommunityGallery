@@ -14,8 +14,23 @@ Telegram Community Gallery is built using the following technologies:
 - **Frontend**: [SvelteKit](https://kit.svelte.dev/) and [Tailwind](https://tailwindcss.com/)
 - **Icons**: [Lucide Icons](https://lucide.dev/)
 - **Component Library**: [Shadcn-Svelte](https://www.shadcn-svelte.com/)
-- **Backend**: [HonoJS](https://hono.dev/) 
-- **Database**: [MongoDB](https://www.mongodb.com/)
+- **Auth, Database, Storage**: [Supabase](https://supabase.com/)
+
+### Local setup
+1. Copy `.env.example` to `.env.local` and add your Supabase URL and publishable key.
+2. In the Supabase SQL editor, run `supabase/schema.sql` to create the `communities` table, RLS policies, and the `community-images` bucket.
+3. In **Authentication → URL Configuration**, set:
+   - **Site URL:** `https://telegram.dagmawi.dev`
+   - **Redirect URLs:**
+     - `https://telegram.dagmawi.dev/auth/callback`
+     - `https://telegram.dagmawi.dev/auth/confirm`
+     - `https://telegram.dagmawi.dev/**`
+     - `http://localhost:5173/auth/callback`
+     - `http://localhost:5173/**`
+4. Keep the **Email** provider enabled. Sign-in uses Gmail plus a password.
+5. `npm install` then `npm run dev`.
+
+Production env vars on the host should include `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `PUBLIC_SITE_URL=https://telegram.dagmawi.dev`.
 
 ### Getting Started 🚀
 To get started with Telegram Community Gallery, simply visit our [Website](https://telegram.dagmawi.dev) and start exploring! If you'd like to contribute to the project or report any issues, check out our [GitHub repository.](https://github.com/dagmawibabi/TelegramCommunityGallery)

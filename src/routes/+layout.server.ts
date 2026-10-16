@@ -1,9 +1,8 @@
-import type { LayoutServerLoad } from "./$types"
+import type { LayoutServerLoad } from './$types';
 
-// -> load serverside any data we need.
-
-export const load: LayoutServerLoad = async (event) =>{
-    return {
-        session: await event.locals.auth()
-    }
-}
+export const load: LayoutServerLoad = async ({ locals: { claims }, cookies }) => {
+	return {
+		claims,
+		cookies: cookies.getAll()
+	};
+};

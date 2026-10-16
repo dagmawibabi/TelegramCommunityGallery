@@ -5,7 +5,6 @@
 	import AddCommunity from '../components/addCommunity.svelte';
 	import EachCommunity from '../components/eachCommunity.svelte';
 	import Footer from '../components/footer.svelte';
-	import axios from 'axios';
 	import { currentCommunityStore, allCommunitiesStore, filteredTagsStore } from '../store/store';
 	import Header from '../components/header.svelte';
 	import { CircleX, Search } from 'lucide-svelte';
@@ -23,18 +22,18 @@
 		owner: string | null | undefined;
 		tags: string[];
 		type: string;
+		image_url?: string | null;
 	};
-	let communities: Community[] = [];
+	let loaded = false;
 
 	let allCommunities = <Community[]>[];
 	allCommunitiesStore.subscribe((data) => {
 		allCommunities = data;
 	});
 
-	allCommunitiesStore.set(communities);
-
 	onMount(() => {
 		allCommunitiesStore.set(data.allCommunities);
+		loaded = true;
 	});
 
 	let filterFeedTags = <string[]>[];
@@ -209,31 +208,44 @@
 				</div>
 			</div>
 
-			{#if $allCommunitiesStore.length > 0}
-				{#if $filteredCommunities.length > 0}
-					<div
-						class="grid grid-cols-1 gap-5 pt-14 pb-48 px-10
-              md:grid md:grid-cols-3 md:px-0
-          "
-					>
-						{#each $filteredCommunities as community}
-							<a href="/{community.link}" on:click={(e) => currentCommunityStore.set(community)}>
-								<EachCommunity {community} />
-							</a>
-						{/each}
-					</div>
-				{:else}
-					<div class="pt-40 pb-60 text-center w-full">
-						<span class="text-md text-zinc-300">
-							No communities found matching your criteria.
-						</span>
-					</div>
-				{/if}
-			{:else}
+			{#if data.dbError}
+				<div class="pt-16 pb-8 text-center w-full px-6">
+					<p class="text-md text-amber-400">
+						Supabase is connected, but the <code class="text-white">communities</code> table is
+						missing. Run <code class="text-white">supabase/schema.sql</code> in the SQL editor.
+					</p>
+				</div>
+			{/if}
+
+			{#if !loaded}
 				<div class="pt-40 pb-60 text-center w-full">
 					<span class="text-md text-zinc-300"> Loading Communities... </span>
 				</div>
+			{:else if $filteredCommunities.length > 0}
+				<div
+					class="grid grid-cols-1 gap-5 pt-14 pb-48 px-10
+              md:grid md:grid-cols-3 md:px-0
+          "
+				>
+					{#each $filteredCommunities as community}
+						<a
+							class="block overflow-visible"
+							href="/{community.link}"
+							on:click={(e) => currentCommunityStore.set(community)}
+						>
+							<EachCommunity {community} />
+						</a>
+					{/each}
+				</div>
+			{:else}
+				<div class="pt-40 pb-60 text-center w-full">
+					<span class="text-md text-zinc-300">
+						No communities found matching your criteria.
+					</span>
+				</div>
 			{/if}
+
+			<Footer />
 		</div>
 	</div>
 </div>
