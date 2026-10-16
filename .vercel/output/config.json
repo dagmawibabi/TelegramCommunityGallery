@@ -1,0 +1,68 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": ".*",
+			"continue": true,
+			"transforms": [
+				{
+					"type": "request.query",
+					"op": "delete",
+					"target": {
+						"key": "__pathname"
+					}
+				}
+			]
+		},
+		{
+			"src": "/_app/immutable/.+",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "/_app/immutable/.+",
+			"status": 404,
+			"headers": {
+				"cache-control": "no-store"
+			},
+			"continue": false
+		},
+		{
+			"src": "^/?(?:/__data.json)?$",
+			"dest": "/"
+		},
+		{
+			"src": "^/api/create-community/?(?:/__data.json)?$",
+			"dest": "/api/create-community"
+		},
+		{
+			"src": "^/api/get-communities/?(?:/__data.json)?$",
+			"dest": "/api/get-communities"
+		},
+		{
+			"src": "^/api/get-community/?(?:/__data.json)?$",
+			"dest": "/api/get-community"
+		},
+		{
+			"src": "^/auth/callback/?(?:/__data.json)?$",
+			"dest": "/auth/callback"
+		},
+		{
+			"src": "^/auth/confirm/?(?:/__data.json)?$",
+			"dest": "/auth/confirm"
+		},
+		{
+			"src": "^/([^/]+?)/?(?:/__data.json)?$",
+			"dest": "/[username]"
+		},
+		{
+			"src": "/.*",
+			"dest": "/![-]/catchall"
+		}
+	],
+	"overrides": {}
+}
